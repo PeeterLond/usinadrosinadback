@@ -78,8 +78,6 @@ INSERT INTO public.message (id, letter_title, letter_body, letter_time, sender_u
 
 INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (1, 1, 5, 'Ideaalne töö');
 
-INSERT INTO public.contact (id, user_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (1, 1, 1, null, 'Usin', 'Rosin', '55555888', 'usinrosin@gmail.com', 'Olen usin rosin. ');
-INSERT INTO public.contact (id, user_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (2, 2, 1, null, 'Rosin', 'Usin', '55584448', 'rosinusin@gmail.com', 'Olen rosin usin.');
 
 INSERT INTO public.chore (id, name) VALUES (1, 'Põranda puhastus/pesu');
 INSERT INTO public.chore (id, name) VALUES (2, 'Akende pesu');
@@ -89,11 +87,4 @@ INSERT INTO public.chore (id, name) VALUES (5, 'Vannitoa puhastus/katlakivi eema
 INSERT INTO public.chore (id, name) VALUES (6, 'Pesu triikimine');
 INSERT INTO public.chore (id, name) VALUES (7, 'Asjade koristus');
 INSERT INTO public.chore (id, name) VALUES (8, 'Lillede hooldus');
-
-INSERT INTO public.advertisement (id, user_id, city_id, tool_id, type_id, location_id, description, area, price, time) VALUES (1, 1, 1, 1, 1, null, 'Otsin head koristajat!', 200, 10.50, '2023-09-07 09:38:36.000000');
-
-INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (1, 1, 1);
-INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (2, 2, 1);
-INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (3, 4, 1);
-INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (4, 5, 1);
 

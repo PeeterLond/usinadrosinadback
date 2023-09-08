@@ -1,12 +1,13 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2023-09-06 13:45:54.227
+-- Last modification date: 2023-09-08 13:08:21.382
 
 -- tables
 -- Table: advertisement
 CREATE TABLE advertisement (
                                id serial  NOT NULL,
                                user_id int  NOT NULL,
-                               city_id int  NOT NULL,
+                               county_id int  NOT NULL,
+                               city_id int  NULL,
                                tool_id int  NOT NULL,
                                type_id int  NOT NULL,
                                location_id int  NULL,
@@ -44,7 +45,8 @@ CREATE TABLE city (
 CREATE TABLE contact (
                          id serial  NOT NULL,
                          user_id int  NOT NULL,
-                         city_id int  NOT NULL,
+                         county_id int  NOT NULL,
+                         city_id int  NULL,
                          image_id int  NULL,
                          first_name varchar(50)  NOT NULL,
                          last_name varchar(50)  NOT NULL,
@@ -137,6 +139,14 @@ ALTER TABLE advertisement_chore ADD CONSTRAINT advertisement_chore_advertisement
             INITIALLY IMMEDIATE
 ;
 
+-- Reference: advertisement_county (table: advertisement)
+ALTER TABLE advertisement ADD CONSTRAINT advertisement_county
+    FOREIGN KEY (county_id)
+        REFERENCES county (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: advertisment_city (table: advertisement)
 ALTER TABLE advertisement ADD CONSTRAINT advertisment_city
     FOREIGN KEY (city_id)
@@ -179,6 +189,14 @@ ALTER TABLE advertisement ADD CONSTRAINT advertisment_user
 
 -- Reference: city_county (table: city)
 ALTER TABLE city ADD CONSTRAINT city_county
+    FOREIGN KEY (county_id)
+        REFERENCES county (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: contact_county (table: contact)
+ALTER TABLE contact ADD CONSTRAINT contact_county
     FOREIGN KEY (county_id)
         REFERENCES county (id)
         NOT DEFERRABLE
