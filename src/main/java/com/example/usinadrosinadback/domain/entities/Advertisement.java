@@ -1,5 +1,6 @@
 package com.example.usinadrosinadback.domain.entities;
 
+import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

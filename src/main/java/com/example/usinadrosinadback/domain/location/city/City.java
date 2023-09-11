@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.location.city;
 
 import com.example.usinadrosinadback.domain.location.county.County;
 import jakarta.persistence.*;
