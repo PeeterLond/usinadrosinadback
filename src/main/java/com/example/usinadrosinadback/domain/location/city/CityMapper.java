@@ -1,5 +1,6 @@
 package com.example.usinadrosinadback.domain.location.city;
 
+import com.example.usinadrosinadback.business.location.dto.CityDto;
 import org.mapstruct.*;
 
 import java.util.List;

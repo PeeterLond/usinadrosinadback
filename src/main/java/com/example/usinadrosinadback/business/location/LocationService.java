@@ -2,7 +2,7 @@ package com.example.usinadrosinadback.business.location;
 
 import com.example.usinadrosinadback.business.location.dto.CountyDto;
 import com.example.usinadrosinadback.domain.location.city.City;
-import com.example.usinadrosinadback.domain.location.city.CityDto;
+import com.example.usinadrosinadback.business.location.dto.CityDto;
 import com.example.usinadrosinadback.domain.location.city.CityMapper;
 import com.example.usinadrosinadback.domain.location.city.CityService;
 import com.example.usinadrosinadback.domain.location.county.County;
