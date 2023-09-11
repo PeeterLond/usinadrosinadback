@@ -32,8 +32,8 @@ public class LocationService {
         return countyMapper.toCountyDtos(counties);
     }
 
-    public List<CityDto> getCities() {
-        List<City> cities = cityService.getAllCities();
+    public List<CityDto> getCitiesBy(Integer countyId) {
+        List<City> cities = cityService.getAllCitiesBy(countyId);
         return cityMapper.toCityDtos(cities);
     }
 }
