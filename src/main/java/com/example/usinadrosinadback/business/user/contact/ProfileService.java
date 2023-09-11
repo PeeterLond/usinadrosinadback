@@ -46,9 +46,33 @@ public class ProfileService {
 
     @Transactional
     public void addContact(ContactDto request) {
-
         contactService.confirmContactUsernameAvailability(request.getUserUsername());
         Contact contact = contactMapper.toContact(request);
+
+        createSaveAndSetUserToContact(request, contact);
+        setCountyToContact(request, contact);
+        setCityToContact(request, contact);
+
+        String imageData = request.getImageData();
+        if (hasImage(imageData)) {
+            saveAndSetNewImageToContact(imageData, contact);
+        }
+
+        contactService.saveContact(contact);
+
+    }
+
+    private void setCityToContact(ContactDto request, Contact contact) {
+        City city = cityService.getCityBy(request.getCityId());
+        contact.setCity(city);
+    }
+
+    private void setCountyToContact(ContactDto request, Contact contact) {
+        County county = countyService.getCountyBy(request.getCountyId());
+        contact.setCounty(county);
+    }
+
+    private void createSaveAndSetUserToContact(ContactDto request, Contact contact) {
         User user = new User();
         user.setUsername(request.getUserUsername());
         user.setPassword(request.getUserPassword());
@@ -57,21 +81,6 @@ public class ProfileService {
         user.setRole(customerRole);
         userService.saveUser(user);
         contact.setUser(user);
-
-        County county = countyService.getCountyBy(request.getCountyId());
-        contact.setCounty(county);
-
-        City city = cityService.getCityBy(request.getCityId());
-        contact.setCity(city);
-
-        String imageData = request.getImageData();
-
-        if (hasImage(imageData)) {
-            saveAndSetNewImageToContact(imageData, contact);
-        }
-
-        contactService.saveContact(contact);
-
     }
 
     private void saveAndSetNewImageToContact(String imageData, Contact contact) {
