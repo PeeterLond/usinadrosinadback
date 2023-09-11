@@ -1,7 +1,8 @@
 package com.example.usinadrosinadback.domain.user.contact;
 
-import com.example.usinadrosinadback.domain.entities.Image;
+import com.example.usinadrosinadback.domain.user.image.Image;
 import com.example.usinadrosinadback.domain.location.city.City;
+import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import lombok.Setter;
 @Table(name = "contact")
 public class Contact {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -25,7 +27,11 @@ public class Contact {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "county_id", nullable = false)
+    private County county;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     private City city;
 
     @ManyToOne(fetch = FetchType.LAZY)

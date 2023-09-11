@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.user.image;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

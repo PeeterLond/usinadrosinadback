@@ -14,4 +14,8 @@ public class CountyService {
     public List<County> getAllCounties() {
         return countyRepository.findAll();
     }
+
+    public County getCountyBy(Integer cityCountyId) {
+        return countyRepository.getReferenceById(cityCountyId);
+    }
 }

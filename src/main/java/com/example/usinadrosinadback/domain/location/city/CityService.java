@@ -14,4 +14,8 @@ public class CityService {
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
+
+    public City getCityBy(Integer cityId) {
+        return cityRepository.getReferenceById(cityId);
+    }
 }

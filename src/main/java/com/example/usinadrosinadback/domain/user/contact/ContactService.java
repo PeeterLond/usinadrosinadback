@@ -14,4 +14,8 @@ public class ContactService {
         boolean contactUsernameExists = contactRepository.contactExistsBy(username);
         ValidationService.validateContactUsernameIsAvailable(contactUsernameExists);
     }
+
+    public void saveContact(Contact contact) {
+        contactRepository.save(contact);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.usinadrosinadback.business.user.contact.dto;
 
+import com.example.usinadrosinadback.domain.user.contact.Contact;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
@@ -7,15 +8,15 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.example.usinadrosinadback.domain.user.contact.Contact}
+ * DTO for {@link Contact}
  */
 @Value
 public class ContactDto implements Serializable {
     String userUsername;
     String userPassword;
+    Integer countyId;
     Integer cityId;
-    Integer cityCountyId;
-    byte[] imageData;
+    String imageData;
     @NotNull
     @Size(max = 50)
     String contactFirstName;
