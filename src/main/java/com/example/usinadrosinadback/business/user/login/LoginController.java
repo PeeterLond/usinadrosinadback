@@ -1,6 +1,6 @@
-package com.example.usinadrosinadback.business.login;
+package com.example.usinadrosinadback.business.user.login;
 
-import com.example.usinadrosinadback.business.login.dto.LoginResponseDto;
+import com.example.usinadrosinadback.business.user.login.dto.LoginResponseDto;
 import com.example.usinadrosinadback.infrastucture.error.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

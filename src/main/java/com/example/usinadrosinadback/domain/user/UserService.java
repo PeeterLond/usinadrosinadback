@@ -18,4 +18,8 @@ public class UserService {
         Optional<User> user = userRepository.findUserBy(username, password, ACTIVE.getLetter());
         return ValidationService.getValidUser(user);
     }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
 }

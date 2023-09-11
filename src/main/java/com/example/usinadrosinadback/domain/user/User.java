@@ -1,6 +1,6 @@
 package com.example.usinadrosinadback.domain.user;
 
-import com.example.usinadrosinadback.domain.entities.Role;
+import com.example.usinadrosinadback.domain.user.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

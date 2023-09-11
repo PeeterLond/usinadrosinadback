@@ -1,6 +1,6 @@
 package com.example.usinadrosinadback.domain.user;
 
-import com.example.usinadrosinadback.business.login.dto.LoginResponseDto;
+import com.example.usinadrosinadback.business.user.login.dto.LoginResponseDto;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)

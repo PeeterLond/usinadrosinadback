@@ -1,6 +1,6 @@
-package com.example.usinadrosinadback.business.login;
+package com.example.usinadrosinadback.business.user.login;
 
-import com.example.usinadrosinadback.business.login.dto.LoginResponseDto;
+import com.example.usinadrosinadback.business.user.login.dto.LoginResponseDto;
 import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.user.UserMapper;
 import com.example.usinadrosinadback.domain.user.UserService;

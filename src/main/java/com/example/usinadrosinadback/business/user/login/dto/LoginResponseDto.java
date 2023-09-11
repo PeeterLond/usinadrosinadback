@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.business.login.dto;
+package com.example.usinadrosinadback.business.user.login.dto;
 
 import com.example.usinadrosinadback.domain.user.User;
 import lombok.Value;

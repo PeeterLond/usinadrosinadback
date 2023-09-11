@@ -1,5 +1,6 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.user.contact;
 
+import com.example.usinadrosinadback.domain.entities.Image;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
