@@ -72,11 +72,6 @@ INSERT INTO public.city (id, county_id, name) VALUES (40, 15, 'Antsla');
 INSERT INTO public.city (id, county_id, name) VALUES (12, 15, 'Võru');
 
 INSERT INTO public."user" (id, role_id, username, password, status) VALUES (1, 2, 'usin', '123', 'A');
-INSERT INTO public."user" (id, role_id, username, password, status) VALUES (2, 2, 'rosin', '123', 'A');
-
-INSERT INTO public.message (id, letter_title, letter_body, letter_time, sender_user_id, receiver_user_id, is_read) VALUES (1, 'Pealkiri', 'Sisu', '2023-09-07 09:29:57.000000', 1, 2, false);
-
-INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (1, 1, 5, 'Ideaalne töö');
 
 
 INSERT INTO public.chore (id, name) VALUES (1, 'Põranda puhastus/pesu');

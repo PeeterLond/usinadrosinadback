@@ -1,9 +1,9 @@
 package com.example.usinadrosinadback.domain.user.contact;
 
 import com.example.usinadrosinadback.domain.user.image.Image;
+import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.county.County;
-import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

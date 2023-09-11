@@ -1,6 +1,7 @@
 package com.example.usinadrosinadback.domain.entities;
 
 import com.example.usinadrosinadback.domain.location.city.City;
+import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +29,11 @@ public class Advertisement {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "county_id", nullable = false)
+    private County county;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     private City city;
 
     @NotNull

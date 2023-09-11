@@ -18,6 +18,7 @@ import com.example.usinadrosinadback.domain.user.role.RoleService;
 import com.example.usinadrosinadback.util.ImageConverter;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProfileService {
@@ -43,6 +44,7 @@ public class ProfileService {
     @Resource
     private ContactMapper contactMapper;
 
+    @Transactional
     public void addContact(ContactDto request) {
 
         contactService.confirmContactUsernameAvailability(request.getUserUsername());

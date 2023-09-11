@@ -12,8 +12,11 @@ import java.io.Serializable;
  */
 @Value
 public class ContactDto implements Serializable {
+    @NotNull
     String userUsername;
+    @NotNull
     String userPassword;
+    @NotNull
     Integer countyId;
     Integer cityId;
     String imageData;
