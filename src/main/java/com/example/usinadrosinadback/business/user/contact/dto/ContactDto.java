@@ -3,6 +3,9 @@ package com.example.usinadrosinadback.business.user.contact.dto;
 import com.example.usinadrosinadback.domain.user.contact.Contact;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -10,27 +13,29 @@ import java.io.Serializable;
 /**
  * DTO for {@link Contact}
  */
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContactDto implements Serializable {
     @NotNull
-    String userUsername;
+    private String userUsername;
     @NotNull
-    String userPassword;
+    private String userPassword;
     @NotNull
-    Integer countyId;
-    Integer cityId;
-    String imageData;
-    @NotNull
-    @Size(max = 50)
-    String contactFirstName;
+    private Integer countyId;
+    private Integer cityId;
+    private String imageData;
     @NotNull
     @Size(max = 50)
-    String contactLastName;
-    @Size(max = 50)
-    String contactMobileNumber;
+    private String contactFirstName;
     @NotNull
     @Size(max = 50)
-    String contactEmail;
+    private String contactLastName;
+    @Size(max = 50)
+    private String contactMobileNumber;
+    @NotNull
+    @Size(max = 50)
+    private String contactEmail;
     @Size(max = 2000)
-    String contactIntroduction;
+    private String contactIntroduction;
 }

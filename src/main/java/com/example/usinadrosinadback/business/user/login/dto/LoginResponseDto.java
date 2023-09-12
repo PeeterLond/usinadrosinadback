@@ -1,6 +1,9 @@
 package com.example.usinadrosinadback.business.user.login.dto;
 
 import com.example.usinadrosinadback.domain.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -8,8 +11,10 @@ import java.io.Serializable;
 /**
  * DTO for {@link User}
  */
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginResponseDto implements Serializable {
-    Integer userId;
-    String roleName;
+    private Integer userId;
+    private String roleName;
 }

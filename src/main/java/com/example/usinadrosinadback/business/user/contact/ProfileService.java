@@ -51,7 +51,9 @@ public class ProfileService {
 
         createSaveAndSetUserToContact(request, contact);
         setCountyToContact(request, contact);
-        setCityToContact(request, contact);
+        if (hasCityId(request.getCityId())) {
+            setCityToContact(request, contact);
+        }
 
         String imageData = request.getImageData();
         if (hasImage(imageData)) {
@@ -60,6 +62,10 @@ public class ProfileService {
 
         contactService.saveContact(contact);
 
+    }
+
+    private static boolean hasCityId(Integer cityId) {
+        return !cityId.equals(0);
     }
 
     private void setCityToContact(ContactDto request, Contact contact) {
