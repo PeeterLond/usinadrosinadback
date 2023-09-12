@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.location.coordinate;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "location")
-public class Location {
+@Table(name = "coordinate")
+public class Coordinate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -15,7 +15,7 @@ public class CountyService {
         return countyRepository.findAll();
     }
 
-    public County getCountyBy(Integer cityCountyId) {
-        return countyRepository.getReferenceById(cityCountyId);
+    public County getCountyBy(Integer countyId) {
+        return countyRepository.getReferenceById(countyId);
     }
 }
