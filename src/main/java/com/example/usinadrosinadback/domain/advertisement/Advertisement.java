@@ -1,5 +1,8 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.advertisement;
 
+import com.example.usinadrosinadback.domain.advertisement.tool.Tool;
+import com.example.usinadrosinadback.domain.advertisement.type.Type;
+import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.user.User;
@@ -47,8 +50,8 @@ public class Advertisement {
     private Type type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @JoinColumn(name = "coordinate_id")
+    private Coordinate coordinate;
 
     @Size(max = 2000)
     @NotNull

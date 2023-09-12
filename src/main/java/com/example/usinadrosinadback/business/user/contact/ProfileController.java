@@ -17,7 +17,9 @@ public class ProfileController {
     private ProfileService profileService;
 
     @PostMapping("/contact")
-    @Operation(summary = "Uue kasutaja lisamine", description = "Pilt,linn, telefoni number ja lühitutvustus ei ole kohustuslikud väljad. Kui city id on 0 siis linna ei lisata kasutaja külge")
+    @Operation(summary = "Uue kasutaja lisamine",
+            description = "Pilt,linn, telefoni number ja lühitutvustus ei ole kohustuslikud väljad. " +
+                    "Kui city id on 0 siis linna ei lisata kasutaja külge")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Selline kasutaja on juba süsteemis olemas.",
