@@ -44,6 +44,7 @@ public class ProfileService {
     @Resource
     private ContactMapper contactMapper;
 
+
     @Transactional
     public void addContact(ContactDto request) {
         contactService.confirmContactUsernameAvailability(request.getUserUsername());
@@ -98,5 +99,12 @@ public class ProfileService {
 
     private boolean hasImage(String imageData) {
         return imageData != null && !imageData.isEmpty();
+    }
+
+    public ContactDto getProfileInfo(Integer userId) {
+        Contact contact = contactService.getContactInfoBy(userId);
+        ContactDto contactInfoDto = contactMapper.toContactInfoDto(contact);
+        return contactInfoDto;
+
     }
 }

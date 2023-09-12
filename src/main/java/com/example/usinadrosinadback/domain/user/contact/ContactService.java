@@ -18,4 +18,9 @@ public class ContactService {
     public void saveContact(Contact contact) {
         contactRepository.save(contact);
     }
+
+    public Contact getContactInfoBy(Integer userId) {
+       return contactRepository.getContactBy(userId);
+
+    }
 }

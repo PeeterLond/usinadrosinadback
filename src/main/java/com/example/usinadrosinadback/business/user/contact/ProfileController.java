@@ -8,9 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProfileController {
@@ -26,6 +24,10 @@ public class ProfileController {
                     content = @Content(schema = @Schema(implementation = ApiError.class)))})
     public void addContact(@RequestBody ContactDto request) {
         profileService.addContact(request);
-
+    }
+    @GetMapping("/contact")
+    @Operation(summary = "Leiab userId järgi kasutja info.")
+    public ContactDto getProfileInfo(@RequestParam Integer userId){
+       return profileService.getProfileInfo(userId);
     }
 }

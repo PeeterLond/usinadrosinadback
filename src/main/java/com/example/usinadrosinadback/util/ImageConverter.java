@@ -15,6 +15,13 @@ public class ImageConverter {
     }
 
     private static byte[] getBytesArrayFromImageData(String imageData) {
-       return imageData.getBytes(StandardCharsets.UTF_8);
+        return imageData.getBytes(StandardCharsets.UTF_8);
+    }
+
+    public static String imageToImageData(Image image) {
+        if (image == null) {
+            return "";
+        }
+        return new String(image.getData(), StandardCharsets.UTF_8);
     }
 }
