@@ -20,6 +20,8 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+
 @Service
 public class ProfileService {
 
@@ -62,8 +64,79 @@ public class ProfileService {
         }
 
         contactService.saveContact(contact);
+    }
+
+    public ContactDto getContactInfo(Integer userId) {
+        Contact contact = contactService.getContactInfoBy(userId);
+        return contactMapper.toContactInfoDto(contact);
 
     }
+
+    @Transactional
+    public void updateContactInfo(Integer userId, ContactDto request) {
+        Contact contact = contactService.getContactInfoBy(userId);
+        contactMapper.partialUpdate(request, contact);
+
+        handleCountyUpdate(request, contact);
+        handleCityUpdate(request, contact);
+        handleImageUpdate(request, contact);
+
+        contactService.saveContact(contact);
+
+        }
+
+    private void handleCityUpdate(ContactDto request, Contact contact) {
+        Integer requestCityId = request.getCityId();
+        if (!haveSameCityId(requestCityId, contact)) {
+            City city = cityService.getCityBy(requestCityId);
+            contact.setCity(city);
+        }
+    }
+
+    private void handleCountyUpdate(ContactDto request, Contact contact) {
+        Integer requestCountyId = request.getCountyId();
+        if (!haveSameCountyId(requestCountyId, contact)) {
+            County county = countyService.getCountyBy(requestCountyId);
+            contact.setCounty(county);
+        }
+    }
+
+    private void handleImageUpdate(ContactDto request, Contact contact){
+        Image contactImage = contact.getImage();
+        String requestImageData = request.getImageData();
+
+        if (requestImageData.isEmpty()) {
+            return;
+        }
+
+        if (requestHasNewImage(contactImage, requestImageData)) {
+            Image image = ImageConverter.imageDataToImage(requestImageData);
+            imageService.saveImage(image);
+            contact.setImage(image);
+
+        } else if (requestHasNewDifferentImage(contactImage, requestImageData)) {
+            byte[] requestImageDataBytes = ImageConverter.getBytesArrayFromImageData(requestImageData);
+            contactImage.setData(requestImageDataBytes);
+            imageService.saveImage(contactImage);
+        }
+    }
+
+    private static boolean requestHasNewImage(Image contactImage, String requestImageData) {
+        return contactImage == null && !requestImageData.isEmpty();
+    }
+
+    private static boolean requestHasNewDifferentImage(Image contactImage, String requestImageData) {
+        boolean hasNewImage = contactImage != null && !requestImageData.isEmpty();
+        boolean hasDifferentImage = hasDifferentImage(contactImage, requestImageData);
+        return hasNewImage && hasDifferentImage;
+    }
+
+    private static boolean hasDifferentImage(Image contactImage, String requestImageData) {
+        byte[] requestImageDataBytes = ImageConverter.getBytesArrayFromImageData(requestImageData);
+        return contactImage.getData().length != requestImageDataBytes.length &&
+                !Arrays.equals(requestImageDataBytes, contactImage.getData());
+    }
+
 
     private static boolean hasCityId(Integer cityId) {
         return !cityId.equals(0);
@@ -94,17 +167,17 @@ public class ProfileService {
         Image image = ImageConverter.imageDataToImage(imageData);
         imageService.saveImage(image);
         contact.setImage(image);
-
     }
 
     private boolean hasImage(String imageData) {
         return imageData != null && !imageData.isEmpty();
     }
 
-    public ContactDto getProfileInfo(Integer userId) {
-        Contact contact = contactService.getContactInfoBy(userId);
-        ContactDto contactInfoDto = contactMapper.toContactInfoDto(contact);
-        return contactInfoDto;
+    private static boolean haveSameCityId(Integer requestCityId, Contact contact) {
+        return requestCityId.equals(contact.getCity().getId());
+    }
 
+    private static boolean haveSameCountyId(Integer requestCountyId, Contact contact) {
+        return requestCountyId.equals(contact.getCounty().getId());
     }
 }

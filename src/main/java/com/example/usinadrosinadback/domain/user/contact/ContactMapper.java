@@ -17,8 +17,6 @@ public interface ContactMapper {
     @Mapping(source = "contactFirstName", target = "firstName")
     Contact toContact(ContactDto contactDto);
 
-
-
     @Mapping(source = "firstName",target = "contactFirstName")
     @Mapping(source = "lastName",target = "contactLastName")
     @Mapping(source = "mobileNumber",target = "contactMobileNumber")
@@ -30,6 +28,14 @@ public interface ContactMapper {
     @Mapping(source = "image", target = "imageData", qualifiedByName = "imageToImageData")
     @Mapping(source = "user.username",target = "userUsername")
     ContactDto toContactInfoDto(Contact contact);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "contactEmail", target = "email")
+    @Mapping(source = "contactIntroduction", target = "introduction")
+    @Mapping(source = "contactFirstName", target = "firstName")
+    @Mapping(source = "contactLastName", target = "lastName")
+    @Mapping(source = "contactMobileNumber", target = "mobileNumber")
+    Contact partialUpdate(ContactDto contactDto, @MappingTarget Contact contact);
 
 
     @Named("imageToImageData")

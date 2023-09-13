@@ -14,7 +14,7 @@ public class ImageConverter {
         return image;
     }
 
-    private static byte[] getBytesArrayFromImageData(String imageData) {
+    public static byte[] getBytesArrayFromImageData(String imageData) {
         return imageData.getBytes(StandardCharsets.UTF_8);
     }
 
