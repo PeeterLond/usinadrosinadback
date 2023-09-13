@@ -1,6 +1,7 @@
 package com.example.usinadrosinadback.domain.entities;
 
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
+import com.example.usinadrosinadback.domain.advertisement.chore.Chore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

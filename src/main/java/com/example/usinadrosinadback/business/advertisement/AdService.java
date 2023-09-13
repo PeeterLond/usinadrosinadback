@@ -1,11 +1,15 @@
 package com.example.usinadrosinadback.business.advertisement;
 
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementDto;
+import com.example.usinadrosinadback.business.advertisement.dto.ChoreDto;
 import com.example.usinadrosinadback.business.advertisement.dto.ToolDto;
 import com.example.usinadrosinadback.business.advertisement.dto.TypeDto;
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementMapper;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
+import com.example.usinadrosinadback.domain.advertisement.chore.Chore;
+import com.example.usinadrosinadback.domain.advertisement.chore.ChoreMapper;
+import com.example.usinadrosinadback.domain.advertisement.chore.ChoreService;
 import com.example.usinadrosinadback.domain.advertisement.tool.Tool;
 import com.example.usinadrosinadback.domain.advertisement.tool.ToolMapper;
 import com.example.usinadrosinadback.domain.advertisement.tool.ToolService;
@@ -23,12 +27,16 @@ import com.example.usinadrosinadback.domain.user.UserService;
 import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
 
 @Service
 public class AdService {
+
+    @Resource
+    private ChoreService choreService;
 
     @Resource
     private AdvertisementService advertisementService;
@@ -52,6 +60,9 @@ public class AdService {
     private UserService userService;
 
     @Resource
+    private ChoreMapper choreMapper;
+
+    @Resource
     private ToolMapper toolMapper;
 
     @Resource
@@ -60,6 +71,7 @@ public class AdService {
     @Resource
     private AdvertisementMapper advertisementMapper;
 
+    @Transactional
     public Integer addAdvertisement(AdvertisementDto request) {
         Advertisement advertisement = advertisementMapper.toAdvertisement(request);
 
@@ -137,5 +149,10 @@ public class AdService {
         List<Tool> advertisementTools = toolService.getAllAdvertisementTools();
         return toolMapper.toToolDtos(advertisementTools);
 
+    }
+
+    public List<ChoreDto> getAllChores() {
+        List<Chore> chores = choreService.getAllChores();
+        return choreMapper.toChoreDtos(chores);
     }
 }

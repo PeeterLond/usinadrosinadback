@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.advertisement.chore;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
