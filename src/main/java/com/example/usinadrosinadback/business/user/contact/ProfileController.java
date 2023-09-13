@@ -25,9 +25,17 @@ public class ProfileController {
     public void addContact(@RequestBody ContactDto request) {
         profileService.addContact(request);
     }
+
     @GetMapping("/contact")
     @Operation(summary = "Leiab userId järgi kasutja info.")
-    public ContactDto getProfileInfo(@RequestParam Integer userId){
-       return profileService.getProfileInfo(userId);
+    public ContactDto getContactInfo(@RequestParam Integer userId) {
+        return profileService.getContactInfo(userId);
+    }
+
+    @PutMapping("/contact")
+    @Operation(summary = "Olemasoleva kasutaja info muutmine",
+            description = "Kui foto on olemas, siis kirjutab üle olemasoleva foto, ei lisa uut fotot andmebaasi")
+    public void updateContactInfo(@RequestParam Integer userId, @RequestBody ContactDto request) {
+        profileService.updateContactInfo(userId, request);
     }
 }
