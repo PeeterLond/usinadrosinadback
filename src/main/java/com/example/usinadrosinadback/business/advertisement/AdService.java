@@ -1,12 +1,16 @@
 package com.example.usinadrosinadback.business.advertisement;
 
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementDto;
+import com.example.usinadrosinadback.business.advertisement.dto.ToolDto;
+import com.example.usinadrosinadback.business.advertisement.dto.TypeDto;
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementMapper;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
 import com.example.usinadrosinadback.domain.advertisement.tool.Tool;
+import com.example.usinadrosinadback.domain.advertisement.tool.ToolMapper;
 import com.example.usinadrosinadback.domain.advertisement.tool.ToolService;
 import com.example.usinadrosinadback.domain.advertisement.type.Type;
+import com.example.usinadrosinadback.domain.advertisement.type.TypeMapper;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeService;
 import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
@@ -21,6 +25,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class AdService {
@@ -45,6 +50,12 @@ public class AdService {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private ToolMapper toolMapper;
+
+    @Resource
+    private TypeMapper typeMapper;
 
     @Resource
     private AdvertisementMapper advertisementMapper;
@@ -115,5 +126,16 @@ public class AdService {
 
     private static boolean advertisementHasCoordinates(AdvertisementDto request) {
         return request.getCoordinateLat() != null && request.getCoordinateLongField() != null;
+    }
+
+    public List<TypeDto> getAllAdvertisementTypes() {
+        List<Type> advertisementTypes = typeService.getAllAdvertisementTypes();
+        return typeMapper.toTypeDtos(advertisementTypes);
+    }
+
+    public List<ToolDto> getAllAdvertisementTools() {
+        List<Tool> advertisementTools = toolService.getAllAdvertisementTools();
+        return toolMapper.toToolDtos(advertisementTools);
+
     }
 }
