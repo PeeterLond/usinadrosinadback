@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.advertisementChore;
 
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.chore.Chore;
