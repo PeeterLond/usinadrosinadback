@@ -16,4 +16,8 @@ public class ChoreService {
     public List<Chore> getAllChores() {
         return choreRepository.findAll();
     }
+
+    public Chore getChoreBy(Integer choreId) {
+        return choreRepository.getReferenceById(choreId);
+    }
 }

@@ -71,10 +71,6 @@ INSERT INTO public.city (id, county_id, name) VALUES (DEFAULT, 14, 'Viljandi');
 INSERT INTO public.city (id, county_id, name) VALUES (DEFAULT, 15, 'Antsla');
 INSERT INTO public.city (id, county_id, name) VALUES (DEFAULT, 15, 'Võru');
 
-
-
-
-
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Põranda puhastus/pesu');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Akende pesu');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Pindade puhastus');
@@ -84,3 +80,8 @@ INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Pesu triikimine');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Asjade koristus');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Lillede hooldus');
 
+INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'usin', '123', 'A');
+INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'rosin', '123', 'A');
+
+INSERT INTO public.contact (id, user_id, county_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (DEFAULT, 1, 6, 21, null, 'Usin', 'Rosin', '555666777', 'usin@rosin.com', 'Tere minu nimi on Usin');
+INSERT INTO public.contact (id, user_id, county_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (DEFAULT, 2, 15, 47, null, 'Rosin', 'Usin', '111222333', 'rosin@usin.com', 'Tere, minu nimi on Rosin');

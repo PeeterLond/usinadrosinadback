@@ -1,9 +1,6 @@
 package com.example.usinadrosinadback.business.advertisement;
 
-import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementDto;
-import com.example.usinadrosinadback.business.advertisement.dto.ChoreDto;
-import com.example.usinadrosinadback.business.advertisement.dto.ToolDto;
-import com.example.usinadrosinadback.business.advertisement.dto.TypeDto;
+import com.example.usinadrosinadback.business.advertisement.dto.*;
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementMapper;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
@@ -16,6 +13,8 @@ import com.example.usinadrosinadback.domain.advertisement.tool.ToolService;
 import com.example.usinadrosinadback.domain.advertisement.type.Type;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeMapper;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeService;
+import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChore;
+import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreService;
 import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.city.CityService;
@@ -28,12 +27,16 @@ import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
 import java.util.List;
 
 @Service
 public class AdService {
+
+    @Resource
+    private AdvertisementChoreService advertisementChoreService;
 
     @Resource
     private ChoreService choreService;
@@ -154,5 +157,35 @@ public class AdService {
     public List<ChoreDto> getAllChores() {
         List<Chore> chores = choreService.getAllChores();
         return choreMapper.toChoreDtos(chores);
+    }
+
+    @Transactional
+    public void addAdvertisementChore(AdvertisementChoreDto request) {
+        AdvertisementChore advertisementChore = new AdvertisementChore();
+        getAndSetChoreToAdvertisementChore(request, advertisementChore);
+        getAndSetAdvertisementToAdvertisementChore(request, advertisementChore);
+        advertisementChoreService.saveAdvertisementChore(advertisementChore);
+    }
+
+    private void getAndSetChoreToAdvertisementChore(AdvertisementChoreDto request, AdvertisementChore advertisementChore) {
+        Chore chore = choreService.getChoreBy(request.getChoreId());
+        advertisementChore.setChore(chore);
+    }
+
+    private void getAndSetAdvertisementToAdvertisementChore(AdvertisementChoreDto request, AdvertisementChore advertisementChore) {
+        Advertisement advertisement = advertisementService.getAdvertisementBy(request.getAdvertisementId());
+        advertisementChore.setAdvertisement(advertisement);
+    }
+
+    public void deleteAdvertisementChore(Integer choreId, Integer advertisementId) {
+        advertisementChoreService.deleteAdvertisementChore(choreId, advertisementId);
+    }
+
+    public void deleteAllAdvertisementChores(Integer advertisementId) {
+        advertisementChoreService.deleteAllAdvertisementsChores(advertisementId);
+    }
+
+    public void deleteAdvertisement(Integer advertisementId) {
+        advertisementService.deleteAdvertisement(advertisementId);
     }
 }

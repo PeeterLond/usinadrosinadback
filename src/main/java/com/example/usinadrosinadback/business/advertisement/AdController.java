@@ -1,15 +1,9 @@
 package com.example.usinadrosinadback.business.advertisement;
 
-import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementDto;
-import com.example.usinadrosinadback.business.advertisement.dto.ChoreDto;
-import com.example.usinadrosinadback.business.advertisement.dto.ToolDto;
-import com.example.usinadrosinadback.business.advertisement.dto.TypeDto;
+import com.example.usinadrosinadback.business.advertisement.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +37,31 @@ public class AdController {
                     "Linn, koordinaadid ja pindala võivad olla tühjad.")
     public Integer addAdvertisement(@RequestBody AdvertisementDto request) {
         return adService.addAdvertisement(request);
+    }
+
+    @PostMapping("/advertisement-chore")
+    @Operation(summary = "Uue teenuse lisamine kuulutusele.")
+    public void addAdvertisementChore(@RequestBody AdvertisementChoreDto request) {
+        adService.addAdvertisementChore(request);
+    }
+
+    @DeleteMapping("/advertisement-chore")
+    @Operation(summary = "Kustutab kuulutuse teenuste tabelist ära vastava teenuse.",
+            description = "Otsib kuulutuse teenuse vastavalt kuulutuse ja teenuse Id-de järgi ja kustutab vastava kuulutuse teenuse")
+    public void deleteAdvertisementChore(@RequestParam Integer choreId, @RequestParam Integer advertisementId) {
+        adService.deleteAdvertisementChore(choreId, advertisementId);
+    }
+
+    @DeleteMapping("/advertisement-chores")
+    @Operation(summary = "Kustutab kõik kuulutuse teenused.",
+            description = "Kustutab kõik kuulutuse teenused mida kasutaja valis kui kasutaja  vajutas kuulutuse teenuste lisamisel katkesta nuppu")
+    public void deleteAllAdvertisementChores(@RequestParam Integer advertisementId) {
+        adService.deleteAllAdvertisementChores(advertisementId);
+    }
+
+    @DeleteMapping("/advertisement")
+    @Operation(summary = "Kustutab kuulutuse", description = "Kustutab kuulutuse kui kasutaja vajutas kuulutuse lisamise ajal katkesta.")
+    public void deleteAdvertisement(@RequestParam Integer advertisementId) {
+        adService.deleteAdvertisement(advertisementId);
     }
 }
