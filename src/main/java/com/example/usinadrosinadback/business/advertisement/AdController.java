@@ -14,21 +14,33 @@ public class AdController {
     private AdService adService;
 
     @GetMapping("/chore")
-    @Operation(summary = "Toob kõik teenused tabelist")
+    @Operation(summary = "Tagastab kõik teenused tabelist")
     public List<ChoreDto> getAllChores() {
         return adService.getAllChores();
     }
 
     @GetMapping("/type")
-    @Operation(summary = "Toob kõik kuulutuse tüübid tabelist")
+    @Operation(summary = "Tagastab kõik kuulutuse tüübid tabelist")
     public List<TypeDto> getAllAdvertisementTypes() {
         return adService.getAllAdvertisementTypes();
     }
 
     @GetMapping("/tool")
-    @Operation(summary = "Toob kõik kuulutuse vahendid tabelist")
+    @Operation(summary = "Tagastab kõik kuulutuse vahendid tabelist")
     public List<ToolDto> getAdvertisementTools() {
         return adService.getAllAdvertisementTools();
+    }
+
+    @GetMapping("/advertisement-user")
+    @Operation(summary = "Tagastab kõik kasutaja kuulutused vastavalt tema Id-le.")
+    public List<AdvertisementShowDto> getUserAdvertisementBy(@RequestParam Integer userId) {
+        return adService.getUserAdvertisementBy(userId);
+    }
+
+    @GetMapping("/advsertisement")
+    @Operation(summary = "Tagastab kõik kuulutused.")
+    public List<AdvertisementShowDto> getAllAdvertisements() {
+        return adService.getAllAdvertisements();
     }
 
     @PostMapping("/advertisement")

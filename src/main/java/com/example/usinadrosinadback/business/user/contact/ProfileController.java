@@ -49,4 +49,5 @@ public class ProfileController {
     public void updateContactInfo(@RequestParam Integer userId, @RequestBody ContactCreateAndEditDto request) {
         profileService.updateContactInfo(userId, request);
     }
+
 }

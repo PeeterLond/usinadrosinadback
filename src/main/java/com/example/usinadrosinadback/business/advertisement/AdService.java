@@ -27,7 +27,6 @@ import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
 import java.util.List;
@@ -187,5 +186,15 @@ public class AdService {
 
     public void deleteAdvertisement(Integer advertisementId) {
         advertisementService.deleteAdvertisement(advertisementId);
+    }
+
+    public List<AdvertisementShowDto> getUserAdvertisementBy(Integer userId) {
+        List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
+        return advertisementMapper.toAdvertisementDtos(userAdvertisements);
+    }
+
+    public List<AdvertisementShowDto> getAllAdvertisements() {
+        List<Advertisement> allAdvertisements = advertisementService.getAllAdvertisements();
+        return advertisementMapper.toAdvertisementDtos(allAdvertisements);
     }
 }

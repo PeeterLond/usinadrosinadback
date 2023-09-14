@@ -2,7 +2,8 @@ package com.example.usinadrosinadback.domain.advertisement;
 
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Service
 public class AdvertisementService {
@@ -21,5 +22,13 @@ public class AdvertisementService {
     public void deleteAdvertisement(Integer advertisementId) {
         Advertisement advertisement = advertisementRepository.getReferenceById(advertisementId);
         advertisementRepository.delete(advertisement);
+    }
+
+    public List<Advertisement> getUserAdvertisementBy(Integer userId) {
+        return advertisementRepository.findAllUserAdvertisementsBy(userId);
+    }
+
+    public List<Advertisement> getAllAdvertisements() {
+        return advertisementRepository.findAll();
     }
 }
