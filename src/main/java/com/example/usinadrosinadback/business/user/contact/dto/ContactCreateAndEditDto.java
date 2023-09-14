@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -16,7 +15,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactDto implements Serializable {
+public class ContactCreateAndEditDto implements Serializable {
     @NotNull
     private String userUsername;
     @NotNull

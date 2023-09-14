@@ -1,7 +1,8 @@
 package com.example.usinadrosinadback.business.user.contact;
 
 import com.example.usinadrosinadback.business.Status;
-import com.example.usinadrosinadback.business.user.contact.dto.ContactDto;
+import com.example.usinadrosinadback.business.user.contact.dto.ContactCreateAndEditDto;
+import com.example.usinadrosinadback.business.user.contact.dto.ContactShowInfoDto;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.city.CityService;
 import com.example.usinadrosinadback.domain.location.county.County;
@@ -48,7 +49,7 @@ public class ProfileService {
 
 
     @Transactional
-    public void addContact(ContactDto request) {
+    public void addContact(ContactCreateAndEditDto request) {
         contactService.confirmContactUsernameAvailability(request.getUserUsername());
         Contact contact = contactMapper.toContact(request);
 
@@ -66,14 +67,18 @@ public class ProfileService {
         contactService.saveContact(contact);
     }
 
-    public ContactDto getContactInfo(Integer userId) {
+    public ContactCreateAndEditDto getContactInfoForEdit(Integer userId) {
         Contact contact = contactService.getContactInfoBy(userId);
-        return contactMapper.toContactInfoDto(contact);
+        return contactMapper.toCreateAndEditContactInfoDto(contact);
 
+    }
+    public ContactShowInfoDto getContactInfoForShow(Integer userId) {
+        Contact contact = contactService.getContactInfoBy(userId);
+        return contactMapper.toShowContactInfoDto(contact);
     }
 
     @Transactional
-    public void updateContactInfo(Integer userId, ContactDto request) {
+    public void updateContactInfo(Integer userId, ContactCreateAndEditDto request) {
         Contact contact = contactService.getContactInfoBy(userId);
         contactMapper.partialUpdate(request, contact);
 
@@ -85,7 +90,7 @@ public class ProfileService {
 
         }
 
-    private void handleCityUpdate(ContactDto request, Contact contact) {
+    private void handleCityUpdate(ContactCreateAndEditDto request, Contact contact) {
         Integer requestCityId = request.getCityId();
         if (!haveSameCityId(requestCityId, contact)) {
             City city = cityService.getCityBy(requestCityId);
@@ -93,7 +98,7 @@ public class ProfileService {
         }
     }
 
-    private void handleCountyUpdate(ContactDto request, Contact contact) {
+    private void handleCountyUpdate(ContactCreateAndEditDto request, Contact contact) {
         Integer requestCountyId = request.getCountyId();
         if (!haveSameCountyId(requestCountyId, contact)) {
             County county = countyService.getCountyBy(requestCountyId);
@@ -101,7 +106,7 @@ public class ProfileService {
         }
     }
 
-    private void handleImageUpdate(ContactDto request, Contact contact){
+    private void handleImageUpdate(ContactCreateAndEditDto request, Contact contact){
         Image contactImage = contact.getImage();
         String requestImageData = request.getImageData();
 
@@ -142,17 +147,17 @@ public class ProfileService {
         return !cityId.equals(0);
     }
 
-    private void setCityToContact(ContactDto request, Contact contact) {
+    private void setCityToContact(ContactCreateAndEditDto request, Contact contact) {
         City city = cityService.getCityBy(request.getCityId());
         contact.setCity(city);
     }
 
-    private void setCountyToContact(ContactDto request, Contact contact) {
+    private void setCountyToContact(ContactCreateAndEditDto request, Contact contact) {
         County county = countyService.getCountyBy(request.getCountyId());
         contact.setCounty(county);
     }
 
-    private void createSaveAndSetUserToContact(ContactDto request, Contact contact) {
+    private void createSaveAndSetUserToContact(ContactCreateAndEditDto request, Contact contact) {
         User user = new User();
         user.setUsername(request.getUserUsername());
         user.setPassword(request.getUserPassword());
@@ -180,4 +185,6 @@ public class ProfileService {
     private static boolean haveSameCountyId(Integer requestCountyId, Contact contact) {
         return requestCountyId.equals(contact.getCounty().getId());
     }
+
+
 }
