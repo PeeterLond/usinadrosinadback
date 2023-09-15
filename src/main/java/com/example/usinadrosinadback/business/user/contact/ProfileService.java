@@ -8,7 +8,9 @@ import com.example.usinadrosinadback.domain.location.city.CityService;
 import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.location.county.CountyService;
 import com.example.usinadrosinadback.domain.user.User;
+import com.example.usinadrosinadback.domain.user.UserMapper;
 import com.example.usinadrosinadback.domain.user.UserService;
+import com.example.usinadrosinadback.domain.user.UserUpdatePasswordDto;
 import com.example.usinadrosinadback.domain.user.contact.Contact;
 import com.example.usinadrosinadback.domain.user.contact.ContactMapper;
 import com.example.usinadrosinadback.domain.user.contact.ContactService;
@@ -46,6 +48,9 @@ public class ProfileService {
 
     @Resource
     private ContactMapper contactMapper;
+
+    @Resource
+    private UserMapper userMapper;
 
 
     @Transactional
@@ -187,4 +192,15 @@ public class ProfileService {
     }
 
 
+    public void updatePassword(Integer userId, UserUpdatePasswordDto request) {
+        handlePasswordUpdate(userId, request);
+    }
+
+    private void handlePasswordUpdate(Integer userId, UserUpdatePasswordDto request) {
+        User user = userService.getUserBy(userId);
+        userMapper.passwordUpdate(request, user);
+        userService.saveUser(user);
+
+
+    }
 }

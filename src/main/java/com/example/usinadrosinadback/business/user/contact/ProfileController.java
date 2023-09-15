@@ -2,6 +2,7 @@ package com.example.usinadrosinadback.business.user.contact;
 
 import com.example.usinadrosinadback.business.user.contact.dto.ContactCreateAndEditDto;
 import com.example.usinadrosinadback.business.user.contact.dto.ContactShowInfoDto;
+import com.example.usinadrosinadback.domain.user.UserUpdatePasswordDto;
 import com.example.usinadrosinadback.infrastucture.error.ApiError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,5 +50,11 @@ public class ProfileController {
     public void updateContactInfo(@RequestParam Integer userId, @RequestBody ContactCreateAndEditDto request) {
         profileService.updateContactInfo(userId, request);
     }
+    @PatchMapping("/user")
+    @Operation(summary = "Kasutaja parooli vahetamine")
+    public void updatePassword(@RequestParam Integer userId, @RequestBody UserUpdatePasswordDto request) {
+        profileService.updatePassword(userId, request);
+    }
+
 
 }

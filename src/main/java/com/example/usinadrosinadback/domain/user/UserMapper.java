@@ -10,5 +10,7 @@ public interface UserMapper {
     @Mapping(source = "role.name", target = "roleName")
     LoginResponseDto toLoginResponseDto(User user);
 
-
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "userPassword", target = "password")
+    User passwordUpdate(UserUpdatePasswordDto userUpdatePasswordDto, @MappingTarget User user);
 }
