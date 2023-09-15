@@ -23,16 +23,23 @@ import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.location.county.CountyService;
 import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.user.UserService;
+import com.example.usinadrosinadback.domain.user.contact.Contact;
+import com.example.usinadrosinadback.domain.user.contact.ContactService;
+import com.example.usinadrosinadback.util.ImageConverter;
 import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AdService {
+
+    @Resource
+    private ContactService contactService;
 
     @Resource
     private AdvertisementChoreService advertisementChoreService;
@@ -188,13 +195,48 @@ public class AdService {
         advertisementService.deleteAdvertisement(advertisementId);
     }
 
-    public List<AdvertisementShowDto> getUserAdvertisementBy(Integer userId) {
+    public List<AdvertisementContactShowDto> getUserAdvertisementBy(Integer userId) {
         List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
         return advertisementMapper.toAdvertisementDtos(userAdvertisements);
     }
 
-    public List<AdvertisementShowDto> getAllAdvertisements() {
+    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
         List<Advertisement> allAdvertisements = advertisementService.getAllAdvertisements();
-        return advertisementMapper.toAdvertisementDtos(allAdvertisements);
+        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(allAdvertisements);
+        ArrayList<Contact> contacts = contactService.getAdvertisementContactInfos(advertisementDtos);
+        setContactInfoToAdvertisement(advertisementDtos, contacts);
+        return advertisementDtos;
+    }
+
+    private static void setContactInfoToAdvertisement(List<AdvertisementContactShowDto> advertisementDtos, ArrayList<Contact> contacts) {
+        for (int i = 0; i < advertisementDtos.size(); i++) {
+            advertisementDtos.get(i).setContactFirstName(contacts.get(i).getFirstName());
+            advertisementDtos.get(i).setContactLastName(contacts.get(i).getLastName());
+            advertisementDtos.get(i).setContactCountyName(contacts.get(i).getCounty().getName());
+            validateAndSetContactCityToAdvertisement(advertisementDtos, contacts, i);
+            validateAndSetContactImageToAdvertisement(advertisementDtos, contacts, i);
+            validateAndSetContactMobileToAdvertisement(advertisementDtos, contacts, i);
+            advertisementDtos.get(i).setContactEmail(contacts.get(i).getEmail());
+
+        }
+    }
+
+    private static void validateAndSetContactMobileToAdvertisement(List<AdvertisementContactShowDto> advertisementDtos, ArrayList<Contact> contacts, int i) {
+        if (contacts.get(i).getMobileNumber() != null) {
+            advertisementDtos.get(i).setContactMobileNumber(contacts.get(i).getMobileNumber());
+        }
+    }
+
+    private static void validateAndSetContactImageToAdvertisement(List<AdvertisementContactShowDto> advertisementDtos, ArrayList<Contact> contacts, int i) {
+        if (contacts.get(i).getImage() != null) {
+            String image = ImageConverter.imageToImageData(contacts.get(i).getImage());
+            advertisementDtos.get(i).setContactImageData(image);
+        }
+    }
+
+    private static void validateAndSetContactCityToAdvertisement(List<AdvertisementContactShowDto> advertisementDtos, ArrayList<Contact> contacts, int i) {
+        if (contacts.get(i).getCity() != null) {
+            advertisementDtos.get(i).setContactCityName(contacts.get(i).getCity().getName());
+        }
     }
 }

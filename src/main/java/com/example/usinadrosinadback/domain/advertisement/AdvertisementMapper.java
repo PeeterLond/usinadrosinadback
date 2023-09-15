@@ -1,7 +1,7 @@
 package com.example.usinadrosinadback.domain.advertisement;
 
+import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementContactShowDto;
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementDto;
-import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementShowDto;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public interface AdvertisementMapper {
     @Mapping(source = "area", target = "advertisementArea")
     @Mapping(source = "price", target = "advertisementPrice")
     @Mapping(source = "time", target = "advertisementTime")
-    AdvertisementShowDto toAdvertisementDto(Advertisement advertisement);
+    AdvertisementContactShowDto toAdvertisementDto(Advertisement advertisement);
 
-    List<AdvertisementShowDto> toAdvertisementDtos(List<Advertisement> advertisements);
+    List<AdvertisementContactShowDto> toAdvertisementDtos(List<Advertisement> advertisements);
 
 }

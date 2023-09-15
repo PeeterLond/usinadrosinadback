@@ -68,18 +68,18 @@ public class ProfileService {
     }
 
     public ContactCreateAndEditDto getContactInfoForEdit(Integer userId) {
-        Contact contact = contactService.getContactInfoBy(userId);
+        Contact contact = contactService.getAdvertisementContactInfos(userId);
         return contactMapper.toCreateAndEditContactInfoDto(contact);
 
     }
     public ContactShowInfoDto getContactInfoForShow(Integer userId) {
-        Contact contact = contactService.getContactInfoBy(userId);
+        Contact contact = contactService.getAdvertisementContactInfos(userId);
         return contactMapper.toShowContactInfoDto(contact);
     }
 
     @Transactional
     public void updateContactInfo(Integer userId, ContactCreateAndEditDto request) {
-        Contact contact = contactService.getContactInfoBy(userId);
+        Contact contact = contactService.getAdvertisementContactInfos(userId);
         contactMapper.partialUpdate(request, contact);
 
         handleCountyUpdate(request, contact);

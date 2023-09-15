@@ -3,6 +3,7 @@ package com.example.usinadrosinadback.business.advertisement;
 import com.example.usinadrosinadback.business.advertisement.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,22 +34,23 @@ public class AdController {
 
     @GetMapping("/advertisement-user")
     @Operation(summary = "Tagastab kõik kasutaja kuulutused vastavalt tema Id-le.")
-    public List<AdvertisementShowDto> getUserAdvertisementBy(@RequestParam Integer userId) {
+    public List<AdvertisementContactShowDto> getUserAdvertisementBy(@RequestParam Integer userId) {
         return adService.getUserAdvertisementBy(userId);
     }
 
-    @GetMapping("/advsertisement")
-    @Operation(summary = "Tagastab kõik kuulutused.")
-    public List<AdvertisementShowDto> getAllAdvertisements() {
-        return adService.getAllAdvertisements();
+    @GetMapping("/advertisement-with-contact")
+    @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga.")
+    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
+        return adService.getAllAdvertisementsWithContact();
     }
 
     @PostMapping("/advertisement")
     @Operation(summary = "Uue kuulutuse lisamine kasutajale. Tagastab kuulutuse id.",
             description = "Kui koordinaate ei tule frondist, siis väärtus null. Lisatakse juurde timeStamp. " +
                     "Linn, koordinaadid ja pindala võivad olla tühjad.")
-    public Integer addAdvertisement(@RequestBody AdvertisementDto request) {
-        return adService.addAdvertisement(request);
+    public ResponseEntity<Integer> addAdvertisement(@RequestBody AdvertisementDto request) {
+        return ResponseEntity.ok(adService.addAdvertisement(request));
+
     }
 
     @PostMapping("/advertisement-chore")

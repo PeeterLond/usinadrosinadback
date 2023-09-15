@@ -1,8 +1,12 @@
 package com.example.usinadrosinadback.domain.user.contact;
 
+import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementContactShowDto;
 import com.example.usinadrosinadback.validation.ValidationService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ContactService {
@@ -19,8 +23,17 @@ public class ContactService {
         contactRepository.save(contact);
     }
 
-    public Contact getContactInfoBy(Integer userId) {
-       return contactRepository.getContactBy(userId);
+    public Contact getAdvertisementContactInfos(Integer userId) {
+        return contactRepository.getContactBy(userId);
 
+    }
+
+    public ArrayList<Contact> getAdvertisementContactInfos(List<AdvertisementContactShowDto> advertisementContactShowDtos) {
+        ArrayList<Contact> contacts = new ArrayList<>();
+        for (AdvertisementContactShowDto advertisementContactShowDto : advertisementContactShowDtos) {
+            Contact contact = contactRepository.getContactBy(advertisementContactShowDto.getUserId());
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }

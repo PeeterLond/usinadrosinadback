@@ -17,7 +17,7 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdvertisementShowDto implements Serializable {
+public class AdvertisementContactShowDto implements Serializable {
     private Integer advertisementId;
     private Integer userId;
     private String countyName;
@@ -35,4 +35,20 @@ public class AdvertisementShowDto implements Serializable {
     private BigDecimal advertisementPrice;
     @NotNull
     private Instant advertisementTime;
+    @NotNull
+    @Size(max = 50)
+    private String contactFirstName;
+    @NotNull
+    @Size(max = 50)
+    private String contactLastName;
+    @NotNull
+    private String contactCountyName;
+    private String contactCityName;
+    private String contactImageData;
+    @Size(max = 50)
+    private String contactMobileNumber;
+    @NotNull
+    @Size(max = 50)
+    private String contactEmail;
+
 }
