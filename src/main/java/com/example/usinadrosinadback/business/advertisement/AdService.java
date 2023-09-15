@@ -195,9 +195,12 @@ public class AdService {
         advertisementService.deleteAdvertisement(advertisementId);
     }
 
-    public List<AdvertisementContactShowDto> getUserAdvertisementBy(Integer userId) {
+    public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(Integer userId) {
         List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
-        return advertisementMapper.toAdvertisementDtos(userAdvertisements);
+        List<AdvertisementContactShowDto> userAdvertisementDtos = advertisementMapper.toAdvertisementDtos(userAdvertisements);
+        ArrayList<Contact> contacts = contactService.getAdvertisementContactInfos(userAdvertisementDtos);
+        setContactInfoToAdvertisement(userAdvertisementDtos, contacts);
+        return userAdvertisementDtos;
     }
 
     public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {

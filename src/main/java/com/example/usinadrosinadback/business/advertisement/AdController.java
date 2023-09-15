@@ -32,10 +32,10 @@ public class AdController {
         return adService.getAllAdvertisementTools();
     }
 
-    @GetMapping("/advertisement-user")
-    @Operation(summary = "Tagastab kõik kasutaja kuulutused vastavalt tema Id-le.")
-    public List<AdvertisementContactShowDto> getUserAdvertisementBy(@RequestParam Integer userId) {
-        return adService.getUserAdvertisementBy(userId);
+    @GetMapping("/advertisement-user-with-contact")
+    @Operation(summary = "Tagastab kõik kasutaja kuulutused koos tema kasutaja infoga vastavalt tema Id-le.")
+    public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(@RequestParam Integer userId) {
+        return adService.getUserAdvertisementsWithContactBy(userId);
     }
 
     @GetMapping("/advertisement-with-contact")
