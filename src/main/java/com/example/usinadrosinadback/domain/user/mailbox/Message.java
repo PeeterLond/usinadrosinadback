@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.user.mailbox;
 
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;

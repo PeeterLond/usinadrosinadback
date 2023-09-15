@@ -185,6 +185,4 @@ public class ProfileService {
     private static boolean haveSameCountyId(Integer requestCountyId, Contact contact) {
         return requestCountyId.equals(contact.getCounty().getId());
     }
-
-
 }
