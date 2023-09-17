@@ -82,13 +82,20 @@ INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Lillede hooldus');
 
 INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'usin', '123', 'A');
 INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'rosin', '123', 'A');
+INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'Peeter', '123', 'A');
 
 INSERT INTO public.contact (id, user_id, county_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (DEFAULT, 1, 6, 21, null, 'Usin', 'Rosin', '555666777', 'usin@rosin.com', 'Tere minu nimi on Usin');
 INSERT INTO public.contact (id, user_id, county_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (DEFAULT, 2, 15, 47, null, 'Rosin', 'Usin', '111222333', 'rosin@usin.com', 'Tere, minu nimi on Rosin');
+INSERT INTO public.contact (id, user_id, county_id, city_id, image_id, first_name, last_name, mobile_number, email, introduction) VALUES (DEFAULT, 3, 1, 1, null, 'Peeter', 'Lond', '54667788', 'Peeter@peeter.com', 'Tere, minu nimi on Peeter ja ma olen hoolikas koristaja.');
+
 
 INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 1, 1, 1, 1, 1, null, 'Pakun koristusteenust Tallinnas. Olen usin tööline', null, 5.50, '2023-09-15 11:00:46.000000');
 INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 1, 1, 1, 2, 2, null, 'Otsin koristusteenust. Mul on vahendid endal olemas. Otsin Usinat koristajat.', 50, 8.00, '2023-09-15 11:03:57.000000');
 INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 2, 14, 44, 2, 2, null, 'Tere, otsin endale akende pesijat Abja-Paluojasse. Mul on suur maja, palju keskmise suurusega aknaid, 15tk. Asjaga kiire', null, 10.00, '2023-09-15 11:07:59.000000');
+INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 3, 1, 2, 1, 1, null, 'Pakun koristusteenust Sauel. Autot endale ei ole, sõidan jalgrattaga kohale Tallinnast.', null, 12.00, '2023-09-17 10:41:57.000000');
+INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 3, 1, 4, 1, 1, null, 'Pakun koristusteenust Keilas. SÕidan rattaga kohjale, nii et võib natuke aega minna.', null, 13.00, '2023-09-17 10:44:28.000000');
+INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 3, 1, 3, 1, 1, null, 'Pakun koristusteenust Paldiskis, Sõidan rongiga kohale Tallinnast.', null, 11.00, '2023-09-17 10:47:10.000000');
+INSERT INTO public.advertisement (id, user_id, county_id, city_id, tool_id, type_id, coordinate_id, description, area, price, time) VALUES (DEFAULT, 3, 3, 11, 2, 2, null, 'Otsin koristusteenust Narva-jõesuus. Vahendid on mul olemas. Pakkumise kiire, tahaks maja puhtaks saada.', 500, 20.00, '2023-09-17 10:52:37.000000');
 
 
 
@@ -104,3 +111,27 @@ INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 7, 2);
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 8, 2);
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 2, 3);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 1, 4);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 2, 4);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 3, 4);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 4, 4);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 1, 5);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 2, 5);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 3, 5);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 4, 5);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 5, 5);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 1, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 2, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 3, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 4, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 5, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 6, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 7, 6);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 1, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 2, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 3, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 4, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 5, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 6, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 7, 7);
+INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 8, 7);
