@@ -45,6 +45,18 @@ public class AdController {
         return adService.getUserAdvertisementsWithContactBy(userId);
     }
 
+    @GetMapping("/advertisement-with-contact-by-county")
+    @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga vastavalt maakonna järgi")
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCounty(@RequestParam Integer countyId) {
+        return adService.getAdvertisementsWithContactByCounty(countyId);
+    }
+
+    @GetMapping("/advertisement-with-contact-by-city")
+    @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga vastavalt linna järgi")
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCity(@RequestParam Integer cityId) {
+        return adService.getAdvertisementsWithContactByCity(cityId);
+    }
+
     @GetMapping("/advertisement-with-contact")
     @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga.")
     public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {

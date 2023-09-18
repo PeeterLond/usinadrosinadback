@@ -31,4 +31,12 @@ public class AdvertisementService {
     public List<Advertisement> getAllAdvertisements() {
         return advertisementRepository.findAll();
     }
+
+    public List<Advertisement> getAdvertisementsByCounty(Integer countyId) {
+        return advertisementRepository.findAdvertisementsByCounty(countyId);
+    }
+
+    public List<Advertisement> getAdvertisementsByCity(Integer cityId) {
+        return advertisementRepository.findAdvertisementsByCity(cityId);
+    }
 }

@@ -23,12 +23,12 @@ public class ContactService {
         contactRepository.save(contact);
     }
 
-    public Contact getAdvertisementContactInfos(Integer userId) {
+    public Contact getAdvertisementContactInfo(Integer userId) {
         return contactRepository.getContactBy(userId);
 
     }
 
-    public ArrayList<Contact> getAdvertisementContactInfos(List<AdvertisementContactShowDto> advertisementContactShowDtos) {
+    public ArrayList<Contact> getAdvertisementsContactInfo(List<AdvertisementContactShowDto> advertisementContactShowDtos) {
         ArrayList<Contact> contacts = new ArrayList<>();
         for (AdvertisementContactShowDto advertisementContactShowDto : advertisementContactShowDtos) {
             Contact contact = contactRepository.getContactBy(advertisementContactShowDto.getUserId());

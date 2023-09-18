@@ -9,5 +9,13 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, In
     @Query("select a from Advertisement a where a.user.id = ?1 order by a.time DESC")
     List<Advertisement> findAllUserAdvertisementsBy(Integer userId);
 
+    @Query("select a from Advertisement a where a.county.id = ?1")
+    List<Advertisement> findAdvertisementsByCounty(Integer countyId);
+
+    @Query("select a from Advertisement a where a.city.id = ?1")
+    List<Advertisement> findAdvertisementsByCity(Integer cityId);
+
+
+
 
 }
