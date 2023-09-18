@@ -1,6 +1,5 @@
 package com.example.usinadrosinadback.domain.advertisementChore;
 
-import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +24,9 @@ public class AdvertisementChoreService {
     public void deleteAllAdvertisementsChores(Integer advertisementId) {
         List<AdvertisementChore> allAdvertisementChores = advertisementChoreRepository.findAllBy(advertisementId);
         advertisementChoreRepository.deleteAllInBatch(allAdvertisementChores);
+    }
+
+    public List<AdvertisementChore> getAdvertisementChoresBy(Integer advertisementId) {
+        return advertisementChoreRepository.getAdvertisementChoresBy(advertisementId);
     }
 }

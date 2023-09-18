@@ -20,6 +20,13 @@ public class AdController {
         return adService.getAllChores();
     }
 
+    @GetMapping("/advertisement-chore")
+    @Operation(summary = "Tagastab kuulutuse teenuse tüübid vastavalt kuulutuse id-le")
+    public List<AdvertisementChoreShowDto> getAdvertisementChoresBy(@RequestParam Integer advertisementId) {
+        return adService.getAdvertisementChoresBy(advertisementId);
+    }
+
+
     @GetMapping("/type")
     @Operation(summary = "Tagastab kõik kuulutuse tüübid tabelist")
     public List<TypeDto> getAllAdvertisementTypes() {

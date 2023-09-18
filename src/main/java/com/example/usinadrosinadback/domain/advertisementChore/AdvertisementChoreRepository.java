@@ -15,6 +15,9 @@ public interface AdvertisementChoreRepository extends JpaRepository<Advertisemen
     @Query("select a from AdvertisementChore a where a.advertisement.id = ?1")
     List<AdvertisementChore> findAllBy(Integer advertisementId);
 
+    @Query("select a from AdvertisementChore a where a.advertisement.id = ?1")
+    List<AdvertisementChore> getAdvertisementChoresBy(Integer advertisementId);
+
 
 
 

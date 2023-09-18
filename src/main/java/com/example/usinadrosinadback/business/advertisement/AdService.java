@@ -14,6 +14,7 @@ import com.example.usinadrosinadback.domain.advertisement.type.Type;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeMapper;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeService;
 import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChore;
+import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreMapper;
 import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreService;
 import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
@@ -67,6 +68,9 @@ public class AdService {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private AdvertisementChoreMapper advertisementChoreMapper;
 
     @Resource
     private ChoreMapper choreMapper;
@@ -241,5 +245,10 @@ public class AdService {
         if (contacts.get(i).getCity() != null) {
             advertisementDtos.get(i).setContactCityName(contacts.get(i).getCity().getName());
         }
+    }
+
+    public List<AdvertisementChoreShowDto> getAdvertisementChoresBy(Integer advertisementId) {
+        List<AdvertisementChore> advertisementChores = advertisementChoreService.getAdvertisementChoresBy(advertisementId);
+         return advertisementChoreMapper.toArvertisementChoreDtos(advertisementChores);
     }
 }
