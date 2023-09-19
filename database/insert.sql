@@ -135,3 +135,9 @@ INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 6, 7);
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 7, 7);
 INSERT INTO public.advertisement_chore (id, chore_id, advertisement_id) VALUES (DEFAULT, 8, 7);
+
+INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (1, 1, 5, 'Suurepärane töö');
+INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (4, 2, 5, 'Väga hea koristaja, kõik pinnad olid täiesti puhtad, ahi läikis justkui uus. Jäime tema tööga väga rahule.');
+INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (5, 1, 4, 'Väga kiiresti puhastas kogu meie maja aknad. Ainuke kriitika on see, et vastu valgust vaadates paistavad aknal kuivatusjäljed. ');
+INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (6, 3, 3, 'Tunnihind võrdlemisi kõrge, aga töö kvaliteet selle eest ei olnud just parim. Valisime vahendid koristaja poolt, ent ikka küsis esimese asjana, kus on meie tolmuimeja. ');
+INSERT INTO public.feedback (id, receiver_user_id, rating, comment) VALUES (7, 2, 5, 'Super töö, kõik oli veel puhtam, kui oleks oodanud enne koristuse tellimist. Teeb ka väga kiiresti, mistõttu on tunnihind mõistlik');
