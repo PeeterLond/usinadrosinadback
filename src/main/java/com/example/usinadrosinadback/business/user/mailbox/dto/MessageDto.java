@@ -27,6 +27,8 @@ public class MessageDto implements Serializable {
     private Instant messageLetterTime;
     private String senderUserUsername;
     private String receiverUserUsername;
+    private Integer senderUserId;
+    private Integer receiverUserId;
     @NotNull
     private Boolean isRead = false;
 }

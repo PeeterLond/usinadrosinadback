@@ -13,4 +13,8 @@ public class MessageService {
     public List<Message> findAllMessagesBy(Integer userId) {
         return messageRepository.getAllMessagesBy(userId);
     }
+
+    public void saveMessage(Message message) {
+        messageRepository.save(message);
+    }
 }
