@@ -18,6 +18,9 @@ public interface AdvertisementChoreRepository extends JpaRepository<Advertisemen
     @Query("select a from AdvertisementChore a where a.advertisement.id = ?1")
     List<AdvertisementChore> getAdvertisementChoresBy(Integer advertisementId);
 
+    @Query("select (count(a) > 0) from AdvertisementChore a where a.advertisement.id = ?1")
+    boolean existsByAdvertisement_Id(Integer id);
+
 
 
 

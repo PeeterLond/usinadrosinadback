@@ -29,4 +29,8 @@ public class AdvertisementChoreService {
     public List<AdvertisementChore> getAdvertisementChoresBy(Integer advertisementId) {
         return advertisementChoreRepository.getAdvertisementChoresBy(advertisementId);
     }
+
+    public boolean checkIfAdvertisementChoresExists(Integer advertisementId) {
+        return advertisementChoreRepository.existsByAdvertisement_Id(advertisementId);
+    }
 }
