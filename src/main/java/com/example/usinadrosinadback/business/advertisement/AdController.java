@@ -13,6 +13,24 @@ public class AdController {
     @Resource
     private AdService adService;
 
+    @GetMapping("/advertisement-chore-exists")
+    @Operation(summary = "Tagastab true kui kuulutusel on olemas teenused.")
+    public ResponseEntity<Boolean> checkAdvertisementChoresExists(@RequestParam Integer advertisementId) {
+        return ResponseEntity.ok(adService.checkIfAdvertisementChoresExists(advertisementId));
+    }
+
+    @GetMapping("/advertisement")
+    @Operation(summary = "Tagastab kuulutuse info vastavalt tema id-le")
+    public AdvertisementDto getAdvertisementBy(@RequestParam Integer advertisementId) {
+        return adService.getAdvertisementBy(advertisementId);
+    }
+
+    @PutMapping("/advertisement")
+    @Operation(summary = "Kasutaja kuulutuse muutmine")
+    public void updateAdvertisement(@RequestParam Integer advertisementId, @RequestBody AdvertisementDto request) {
+        adService.updateAdvertisement(advertisementId, request);
+    }
+
     @GetMapping("/chore")
     @Operation(summary = "Tagastab kõik teenused tabelist")
     public List<ChoreDto> getAllChores() {
@@ -57,7 +75,7 @@ public class AdController {
     }
 
     @GetMapping("/advertisement-with-contact-by-type")
-    @Operation(summary = "Tagastab kõik kuulutused vastavalt tema tüübist")
+    @Operation(summary = "Tagastab kõik kuulutused vastavalt tema tüübile")
     public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(@RequestParam Integer typeId) {
         return adService.getAdvertisementsWithContactByType(typeId);
     }

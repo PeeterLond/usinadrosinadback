@@ -112,13 +112,13 @@ public class AdService {
     }
 
     private void validateAndSetCityToAdvertisement(AdvertisementDto request, Advertisement advertisement) {
-        if (advertisementHasCity(request.getCityId())) {
+        if (requestHasCity(request.getCityId())) {
             City city = cityService.getCityBy(request.getCityId());
             advertisement.setCity(city);
         }
     }
 
-    private static boolean advertisementHasCity(Integer cityId) {
+    private static boolean requestHasCity(Integer cityId) {
         return !cityId.equals(0);
     }
 
@@ -271,5 +271,116 @@ public class AdService {
     public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(Integer toolId) {
         List<Advertisement> advertisementsByTool = advertisementService.getAdvertisementsByTool(toolId);
         return getAndSetContactsToAdvertisementDtos(advertisementsByTool);
+    }
+
+    public AdvertisementDto getAdvertisementBy(Integer advertisementId) {
+        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
+        return advertisementMapper.toAdvertisementDto(advertisement);
+    }
+
+    @Transactional
+    public void updateAdvertisement(Integer advertisementId, AdvertisementDto request) {
+        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
+        advertisementMapper.partialUpdate(request, advertisement);
+
+        getAndSetUserToAdvertisement(request, advertisement);
+        handleCountyUpdate(request, advertisement);
+        handleCityUpdate(request, advertisement);
+        handleToolUpdate(request, advertisement);
+        handleTypeUpdate(request, advertisement);
+        getAndSetTimeToAdvertisement(advertisement);
+//        handleCoordinateUpdate(request, advertisement);
+    }
+
+    private void handleTypeUpdate(AdvertisementDto request, Advertisement advertisement) {
+        Type type = typeService.getTypeBy(request.getTypeId());
+        Integer adTypeId = advertisement.getType().getId();
+        if (!hasSameType(adTypeId, type)) {
+            advertisement.setType(type);
+        }
+    }
+
+    private void handleToolUpdate(AdvertisementDto request, Advertisement advertisement) {
+        Tool tool = toolService.getToolBy(request.getToolId());
+        Integer adToolId = advertisement.getTool().getId();
+        if (!hasSameTool(adToolId, tool)) {
+            advertisement.setTool(tool);
+        }
+    }
+
+    private void handleCityUpdate(AdvertisementDto request, Advertisement advertisement) {
+        if (requestHasCity(request.getCityId())) {
+            City city = cityService.getCityBy(request.getCityId());
+            Integer adCityId = advertisement.getCity().getId();
+            if (!hasSameCity(adCityId, city)) {
+                advertisement.setCity(city);
+            }
+        }
+    }
+
+    private void handleCountyUpdate(AdvertisementDto request, Advertisement advertisement) {
+        County county = countyService.getCountyBy(request.getCountyId());
+        Integer adCountyId = advertisement.getCounty().getId();
+        if (!hasSameCounty(adCountyId, county)) {
+            advertisement.setCounty(county);
+        }
+    }
+
+    private void handleCoordinateUpdate(AdvertisementDto request, Advertisement advertisement) {
+        Coordinate adCoordinates = advertisement.getCoordinate();
+
+        if (!hasCoordinates(request)) {
+            return;
+        }
+        if (requestHasNewCoordinates(request, adCoordinates)) {
+            Coordinate coordinate = createSetAndSaveCoordinate(request);
+            advertisement.setCoordinate(coordinate);
+        } else if (requestHasNewDifferentCoordinate(request, adCoordinates)){
+            Coordinate coordinate = coordinateService.getCoordinateBy(request.getCoordinateLongField(), request.getCoordinateLat());
+            coordinate.setLongField(request.getCoordinateLongField());
+            coordinate.setLat(request.getCoordinateLat());
+            advertisement.setCoordinate(coordinate);
+        }
+    }
+
+    private static boolean requestHasNewDifferentCoordinate(AdvertisementDto request, Coordinate adCoordinates) {
+        return !request.getCoordinateLat().equals(adCoordinates.getLat()) || 
+                !request.getCoordinateLongField().equals(adCoordinates.getLongField());
+    }
+
+    private Coordinate createSetAndSaveCoordinate(AdvertisementDto request) {
+        Coordinate coordinate = new Coordinate();
+        coordinate.setLongField(request.getCoordinateLongField());
+        coordinate.setLat(request.getCoordinateLat());
+        coordinateService.saveCoordinate(coordinate);
+        return coordinate;
+    }
+
+    private static boolean requestHasNewCoordinates(AdvertisementDto request, Coordinate adCoordinates) {
+        return hasCoordinates(request) && adCoordinates == null;
+    }
+
+    private static boolean hasCoordinates(AdvertisementDto request) {
+        return request.getCoordinateLongField() == null && request.getCoordinateLat() == null;
+    }
+
+    private static boolean hasSameType(Integer adTypeId, Type type) {
+        return adTypeId.equals(type.getId());
+    }
+
+    private static boolean hasSameTool(Integer adToolId, Tool tool) {
+        return adToolId.equals(tool.getId());
+    }
+
+    private static boolean hasSameCity(Integer adCityId, City city) {
+        return adCityId.equals(city.getId());
+    }
+
+    private static boolean hasSameCounty(Integer adCountyId, County county) {
+        return adCountyId.equals(county.getId());
+    }
+
+    public boolean checkIfAdvertisementChoresExists(Integer advertisementId) {
+        return advertisementChoreService.checkIfAdvertisementChoresExists(advertisementId);
     }
 }
