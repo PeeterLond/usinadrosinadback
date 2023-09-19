@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.entities;
+package com.example.usinadrosinadback.domain.feedback;
 
 import com.example.usinadrosinadback.domain.user.User;
 import jakarta.persistence.*;
@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
