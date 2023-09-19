@@ -39,4 +39,12 @@ public class AdvertisementService {
     public List<Advertisement> getAdvertisementsByCity(Integer cityId) {
         return advertisementRepository.findAdvertisementsByCity(cityId);
     }
+
+    public List<Advertisement> getAdvertisementsByType(Integer typeId) {
+        return advertisementRepository.findAdvertisementsByType(typeId);
+    }
+
+    public List<Advertisement> getAdvertisementsByTool(Integer toolId) {
+        return advertisementRepository.findAdvertisementsByTool(toolId);
+    }
 }

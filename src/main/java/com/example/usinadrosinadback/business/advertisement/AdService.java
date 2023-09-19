@@ -201,15 +201,16 @@ public class AdService {
 
     public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(Integer userId) {
         List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
-        List<AdvertisementContactShowDto> userAdvertisementDtos = advertisementMapper.toAdvertisementDtos(userAdvertisements);
-        ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(userAdvertisementDtos);
-        setContactInfoToAdvertisement(userAdvertisementDtos, contacts);
-        return userAdvertisementDtos;
+        return getAndSetContactsToAdvertisementDtos(userAdvertisements);
     }
 
     public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
         List<Advertisement> allAdvertisements = advertisementService.getAllAdvertisements();
-        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(allAdvertisements);
+        return getAndSetContactsToAdvertisementDtos(allAdvertisements);
+    }
+
+    private List<AdvertisementContactShowDto> getAndSetContactsToAdvertisementDtos(List<Advertisement> advertisementsBy) {
+        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(advertisementsBy);
         ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(advertisementDtos);
         setContactInfoToAdvertisement(advertisementDtos, contacts);
         return advertisementDtos;
@@ -254,17 +255,21 @@ public class AdService {
 
     public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCounty(Integer countyId) {
         List<Advertisement> advertisementsByCounty = advertisementService.getAdvertisementsByCounty(countyId);
-        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(advertisementsByCounty);
-        ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(advertisementDtos);
-        setContactInfoToAdvertisement(advertisementDtos, contacts);
-        return advertisementDtos;
+        return getAndSetContactsToAdvertisementDtos(advertisementsByCounty);
     }
 
     public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCity(Integer cityId) {
         List<Advertisement> advertisementsByCity = advertisementService.getAdvertisementsByCity(cityId);
-        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(advertisementsByCity);
-        ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(advertisementDtos);
-        setContactInfoToAdvertisement(advertisementDtos, contacts);
-        return advertisementDtos;
+        return getAndSetContactsToAdvertisementDtos(advertisementsByCity);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(Integer typeId) {
+        List<Advertisement> advertisementsByType = advertisementService.getAdvertisementsByType(typeId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByType);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(Integer toolId) {
+        List<Advertisement> advertisementsByTool = advertisementService.getAdvertisementsByTool(toolId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByTool);
     }
 }
