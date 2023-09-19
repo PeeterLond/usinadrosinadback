@@ -1,9 +1,6 @@
 package com.example.usinadrosinadback.business.user.feedback;
 
-import com.example.usinadrosinadback.business.user.feedback.dto.FeedbackDto;
-import com.example.usinadrosinadback.domain.feedback.Feedback;
-import com.example.usinadrosinadback.domain.feedback.FeedbackMapper;
-import com.example.usinadrosinadback.domain.feedback.FeedbackService;
+import com.example.usinadrosinadback.domain.feedback.*;
 import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.user.UserService;
 import jakarta.annotation.Resource;
@@ -23,20 +20,20 @@ public class FeedbacksService {
     private UserService userService;
 
     @Transactional
-    public void addFeedback(FeedbackDto request) {
+    public Integer addFeedback(FeedbackContactViewDto request) {
         Feedback feedback = feedbackMapper.toFeedback(request);
         User user = userService.getUserBy(request.getReceiverUserId());
         feedback.setReceiverUser(user);
         feedback.setComment(request.getFeedbackComment());
         feedback.setRating(request.getFeedbackRating());
         feedbackService.saveFeedback(feedback);
+        return feedback.getId();
 
     }
 
     public List<FeedbackDto> findUserFeedbacks(Integer userId) {
         List<Feedback> feedbacks = feedbackService.findUserFeedbacksBy(userId);
-        List<FeedbackDto> feedbackDtos = feedbackMapper.toFeedbackDtos(feedbacks);
-        return feedbackDtos;
+        return feedbackMapper.toFeedbackDtos(feedbacks);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.usinadrosinadback.business.user.feedback;
 
-import com.example.usinadrosinadback.business.user.feedback.dto.FeedbackDto;
+import com.example.usinadrosinadback.domain.feedback.FeedbackContactViewDto;
+import com.example.usinadrosinadback.domain.feedback.FeedbackDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class FeedbacksController {
     }
 
     @PostMapping("/feedback")
-    @Operation(summary="Kasutajale uue tagasiside lisamine")
-    public void addFeedback(@RequestBody FeedbackDto request) {
-        feedbacksService.addFeedback(request);
+    @Operation(summary="Kasutajale uue tagasiside lisamine. Tagastab tagasiside ID.")
+    public Integer addFeedback(@RequestBody FeedbackContactViewDto request) {
+        return feedbacksService.addFeedback(request);
     }
  }
