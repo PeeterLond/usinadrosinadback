@@ -56,6 +56,18 @@ public class AdController {
         return adService.getAdvertisementsWithContactByCity(cityId);
     }
 
+    @GetMapping("/advertisement-with-contact-by-type")
+    @Operation(summary = "Tagastab kõik kuulutused vastavalt tema tüübist")
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(@RequestParam Integer typeId) {
+        return adService.getAdvertisementsWithContactByType(typeId);
+    }
+
+    @GetMapping("/advertisement-with-contact-by-tool")
+    @Operation(summary = "Tagastab kõik kuulutused vastavalt vahenditele")
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(@RequestParam Integer toolId) {
+        return adService.getAdvertisementsWithContactByTool(toolId);
+    }
+
     @GetMapping("/advertisement-with-contact")
     @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga.")
     public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {

@@ -15,6 +15,14 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, In
     @Query("select a from Advertisement a where a.city.id = ?1")
     List<Advertisement> findAdvertisementsByCity(Integer cityId);
 
+    @Query("select a from Advertisement a where a.type.id = ?1")
+    List<Advertisement> findAdvertisementsByType(Integer typeId);
+
+    @Query("select a from Advertisement a where a.tool.id = ?1")
+    List<Advertisement> findAdvertisementsByTool(Integer toolId);
+
+
+
 
 
 
