@@ -13,9 +13,7 @@ import com.example.usinadrosinadback.domain.advertisement.tool.ToolService;
 import com.example.usinadrosinadback.domain.advertisement.type.Type;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeMapper;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeService;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChore;
 import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreMapper;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreService;
 import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.city.CityService;
@@ -43,9 +41,6 @@ public class AdService {
     private ContactService contactService;
 
     @Resource
-    private AdvertisementChoreService advertisementChoreService;
-
-    @Resource
     private ChoreService choreService;
 
     @Resource
@@ -68,9 +63,6 @@ public class AdService {
 
     @Resource
     private UserService userService;
-
-    @Resource
-    private AdvertisementChoreMapper advertisementChoreMapper;
 
     @Resource
     private ChoreMapper choreMapper;
@@ -98,7 +90,74 @@ public class AdService {
 
         advertisementService.saveAdvertisement(advertisement);
         return advertisement.getId();
+    }
 
+    public List<TypeDto> getAllAdvertisementTypes() {
+        List<Type> advertisementTypes = typeService.getAllAdvertisementTypes();
+        return typeMapper.toTypeDtos(advertisementTypes);
+    }
+
+    public List<ToolDto> getAllAdvertisementTools() {
+        List<Tool> advertisementTools = toolService.getAllAdvertisementTools();
+        return toolMapper.toToolDtos(advertisementTools);
+    }
+
+    public List<ChoreDto> getAllChores() {
+        List<Chore> chores = choreService.getAllChores();
+        return choreMapper.toChoreDtos(chores);
+    }
+
+    public void deleteAdvertisement(Integer advertisementId) {
+        advertisementService.deleteAdvertisement(advertisementId);
+    }
+
+    public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(Integer userId) {
+        List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
+        return getAndSetContactsToAdvertisementDtos(userAdvertisements);
+    }
+
+    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
+        List<Advertisement> allAdvertisements = advertisementService.getAllAdvertisements();
+        return getAndSetContactsToAdvertisementDtos(allAdvertisements);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCounty(Integer countyId) {
+        List<Advertisement> advertisementsByCounty = advertisementService.getAdvertisementsByCounty(countyId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByCounty);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCity(Integer cityId) {
+        List<Advertisement> advertisementsByCity = advertisementService.getAdvertisementsByCity(cityId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByCity);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(Integer typeId) {
+        List<Advertisement> advertisementsByType = advertisementService.getAdvertisementsByType(typeId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByType);
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(Integer toolId) {
+        List<Advertisement> advertisementsByTool = advertisementService.getAdvertisementsByTool(toolId);
+        return getAndSetContactsToAdvertisementDtos(advertisementsByTool);
+    }
+
+    public AdvertisementDto getAdvertisementBy(Integer advertisementId) {
+        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
+        return advertisementMapper.toAdvertisementDto(advertisement);
+    }
+
+    @Transactional
+    public void updateAdvertisement(Integer advertisementId, AdvertisementDto request) {
+        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
+        advertisementMapper.partialUpdate(request, advertisement);
+
+        getAndSetUserToAdvertisement(request, advertisement);
+        handleCountyUpdate(request, advertisement);
+        handleCityUpdate(request, advertisement);
+        handleToolUpdate(request, advertisement);
+        handleTypeUpdate(request, advertisement);
+        getAndSetTimeToAdvertisement(advertisement);
+//        handleCoordinateUpdate(request, advertisement);
     }
 
     private void getAndSetUserToAdvertisement(AdvertisementDto request, Advertisement advertisement) {
@@ -153,62 +212,6 @@ public class AdService {
         return request.getCoordinateLat() != null && request.getCoordinateLongField() != null;
     }
 
-    public List<TypeDto> getAllAdvertisementTypes() {
-        List<Type> advertisementTypes = typeService.getAllAdvertisementTypes();
-        return typeMapper.toTypeDtos(advertisementTypes);
-    }
-
-    public List<ToolDto> getAllAdvertisementTools() {
-        List<Tool> advertisementTools = toolService.getAllAdvertisementTools();
-        return toolMapper.toToolDtos(advertisementTools);
-
-    }
-
-    public List<ChoreDto> getAllChores() {
-        List<Chore> chores = choreService.getAllChores();
-        return choreMapper.toChoreDtos(chores);
-    }
-
-    @Transactional
-    public void addAdvertisementChore(AdvertisementChoreDto request) {
-        AdvertisementChore advertisementChore = new AdvertisementChore();
-        getAndSetChoreToAdvertisementChore(request, advertisementChore);
-        getAndSetAdvertisementToAdvertisementChore(request, advertisementChore);
-        advertisementChoreService.saveAdvertisementChore(advertisementChore);
-    }
-
-    private void getAndSetChoreToAdvertisementChore(AdvertisementChoreDto request, AdvertisementChore advertisementChore) {
-        Chore chore = choreService.getChoreBy(request.getChoreId());
-        advertisementChore.setChore(chore);
-    }
-
-    private void getAndSetAdvertisementToAdvertisementChore(AdvertisementChoreDto request, AdvertisementChore advertisementChore) {
-        Advertisement advertisement = advertisementService.getAdvertisementBy(request.getAdvertisementId());
-        advertisementChore.setAdvertisement(advertisement);
-    }
-
-    public void deleteAdvertisementChore(Integer choreId, Integer advertisementId) {
-        advertisementChoreService.deleteAdvertisementChore(choreId, advertisementId);
-    }
-
-    public void deleteAllAdvertisementChores(Integer advertisementId) {
-        advertisementChoreService.deleteAllAdvertisementsChores(advertisementId);
-    }
-
-    public void deleteAdvertisement(Integer advertisementId) {
-        advertisementService.deleteAdvertisement(advertisementId);
-    }
-
-    public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(Integer userId) {
-        List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
-        return getAndSetContactsToAdvertisementDtos(userAdvertisements);
-    }
-
-    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
-        List<Advertisement> allAdvertisements = advertisementService.getAllAdvertisements();
-        return getAndSetContactsToAdvertisementDtos(allAdvertisements);
-    }
-
     private List<AdvertisementContactShowDto> getAndSetContactsToAdvertisementDtos(List<Advertisement> advertisementsBy) {
         List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(advertisementsBy);
         ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(advertisementDtos);
@@ -225,7 +228,6 @@ public class AdService {
             validateAndSetContactImageToAdvertisement(advertisementDtos, contacts, i);
             validateAndSetContactMobileToAdvertisement(advertisementDtos, contacts, i);
             advertisementDtos.get(i).setContactEmail(contacts.get(i).getEmail());
-
         }
     }
 
@@ -246,50 +248,6 @@ public class AdService {
         if (contacts.get(i).getCity() != null) {
             advertisementDtos.get(i).setContactCityName(contacts.get(i).getCity().getName());
         }
-    }
-
-    public List<AdvertisementChoreShowDto> getAdvertisementChoresBy(Integer advertisementId) {
-        List<AdvertisementChore> advertisementChores = advertisementChoreService.getAdvertisementChoresBy(advertisementId);
-         return advertisementChoreMapper.toArvertisementChoreDtos(advertisementChores);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCounty(Integer countyId) {
-        List<Advertisement> advertisementsByCounty = advertisementService.getAdvertisementsByCounty(countyId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByCounty);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCity(Integer cityId) {
-        List<Advertisement> advertisementsByCity = advertisementService.getAdvertisementsByCity(cityId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByCity);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(Integer typeId) {
-        List<Advertisement> advertisementsByType = advertisementService.getAdvertisementsByType(typeId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByType);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(Integer toolId) {
-        List<Advertisement> advertisementsByTool = advertisementService.getAdvertisementsByTool(toolId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByTool);
-    }
-
-    public AdvertisementDto getAdvertisementBy(Integer advertisementId) {
-        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
-        return advertisementMapper.toAdvertisementDto(advertisement);
-    }
-
-    @Transactional
-    public void updateAdvertisement(Integer advertisementId, AdvertisementDto request) {
-        Advertisement advertisement = advertisementService.getAdvertisementBy(advertisementId);
-        advertisementMapper.partialUpdate(request, advertisement);
-
-        getAndSetUserToAdvertisement(request, advertisement);
-        handleCountyUpdate(request, advertisement);
-        handleCityUpdate(request, advertisement);
-        handleToolUpdate(request, advertisement);
-        handleTypeUpdate(request, advertisement);
-        getAndSetTimeToAdvertisement(advertisement);
-//        handleCoordinateUpdate(request, advertisement);
     }
 
     private void handleTypeUpdate(AdvertisementDto request, Advertisement advertisement) {
@@ -378,9 +336,5 @@ public class AdService {
 
     private static boolean hasSameCounty(Integer adCountyId, County county) {
         return adCountyId.equals(county.getId());
-    }
-
-    public boolean checkIfAdvertisementChoresExists(Integer advertisementId) {
-        return advertisementChoreService.checkIfAdvertisementChoresExists(advertisementId);
     }
 }

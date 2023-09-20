@@ -6,7 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Integer> {
-    @Query("select m from Message m where m.senderUser.id = ?1 or m.receiverUser.id = ?1")
-    List<Message> getAllMessagesBy(Integer userId);
+
+    @Query("select m from Message m where m.senderUser.id = ?1")
+    List<Message> findAllSentMessagesBy(Integer userId);
+
+    @Query("select m from Message m where m.receiverUser.id = ?1")
+    List<Message> findAllReceivedMessagesBy(Integer userId);
 
 }

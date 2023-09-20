@@ -75,8 +75,8 @@ public class ProfileService {
     public ContactCreateAndEditDto getContactInfoForEdit(Integer userId) {
         Contact contact = contactService.getAdvertisementContactInfo(userId);
         return contactMapper.toCreateAndEditContactInfoDto(contact);
-
     }
+
     public ContactShowInfoDto getContactInfoForShow(Integer userId) {
         Contact contact = contactService.getAdvertisementContactInfo(userId);
         return contactMapper.toShowContactInfoDto(contact);
@@ -92,8 +92,11 @@ public class ProfileService {
         handleImageUpdate(request, contact);
 
         contactService.saveContact(contact);
+    }
 
-        }
+    public void updatePassword(Integer userId, UserUpdatePasswordDto request) {
+        handlePasswordUpdate(userId, request);
+    }
 
     private void handleCityUpdate(ContactCreateAndEditDto request, Contact contact) {
         Integer requestCityId = request.getCityId();
@@ -111,7 +114,7 @@ public class ProfileService {
         }
     }
 
-    private void handleImageUpdate(ContactCreateAndEditDto request, Contact contact){
+    private void handleImageUpdate(ContactCreateAndEditDto request, Contact contact) {
         Image contactImage = contact.getImage();
         String requestImageData = request.getImageData();
 
@@ -146,7 +149,6 @@ public class ProfileService {
         return contactImage.getData().length != requestImageDataBytes.length &&
                 !Arrays.equals(requestImageDataBytes, contactImage.getData());
     }
-
 
     private static boolean hasCityId(Integer cityId) {
         return !cityId.equals(0);
@@ -191,16 +193,9 @@ public class ProfileService {
         return requestCountyId.equals(contact.getCounty().getId());
     }
 
-
-    public void updatePassword(Integer userId, UserUpdatePasswordDto request) {
-        handlePasswordUpdate(userId, request);
-    }
-
     private void handlePasswordUpdate(Integer userId, UserUpdatePasswordDto request) {
         User user = userService.getUserBy(userId);
         userMapper.passwordUpdate(request, user);
         userService.saveUser(user);
-
-
     }
 }

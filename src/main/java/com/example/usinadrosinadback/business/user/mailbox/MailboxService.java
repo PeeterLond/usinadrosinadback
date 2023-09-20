@@ -9,6 +9,7 @@ import com.example.usinadrosinadback.domain.user.mailbox.MessageService;
 import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
@@ -25,27 +26,33 @@ public class MailboxService {
     @Resource
     private UserService userService;
 
-    public List<MessageDto> getAllMessagesBy(Integer userId) {
-        List<Message> message = messageService.findAllMessagesBy(userId);
-        return messageMapper.getMessageByDtos(message);
+    public List<MessageDto> findAllSentMessagesBy(Integer userId) {
+        List<Message> messages = messageService.findAllSentMessagesBy(userId);
+        return messageMapper.getMessageDtos(messages);
 
     }
 
+    public List<MessageDto> findAllReceivedMessagesBy(Integer userId) {
+        List<Message> messages = messageService.findAllReceivedMessagesBy(userId);
+        return messageMapper.getMessageDtos(messages);
+    }
+
+    @Transactional
     public void addNewMessage(MessageDto request) {
         Message message = messageMapper.toMessage(request);
-        getAndSetSenderUserIdToMessage(request, message);
-        getAndSetReceiverUserIdToMessage(request, message);
+        getAndSetSenderUserIdToMessage(request.getSenderUserId(), message);
+        getAndSetReceiverUserIdToMessage(request.getReceiverUserId(), message);
         getAndSetTimeToMessage(message);
         messageService.saveMessage(message);
     }
 
-    private void getAndSetSenderUserIdToMessage(MessageDto request, Message message) {
-        User senderUserId = userService.getUserBy(request.getSenderUserId());
+    private void getAndSetSenderUserIdToMessage(Integer userId, Message message) {
+        User senderUserId = userService.getUserBy(userId);
         message.setSenderUser(senderUserId);
     }
 
-    private void getAndSetReceiverUserIdToMessage(MessageDto request, Message message) {
-        User receiverUserId = userService.getUserBy(request.getReceiverUserId());
+    private void getAndSetReceiverUserIdToMessage(Integer userId, Message message) {
+        User receiverUserId = userService.getUserBy(userId);
         message.setReceiverUser(receiverUserId);
     }
 

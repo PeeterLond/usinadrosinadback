@@ -13,11 +13,6 @@ public class AdController {
     @Resource
     private AdService adService;
 
-    @GetMapping("/advertisement-chore-exists")
-    @Operation(summary = "Tagastab true kui kuulutusel on olemas teenused.")
-    public ResponseEntity<Boolean> checkAdvertisementChoresExists(@RequestParam Integer advertisementId) {
-        return ResponseEntity.ok(adService.checkIfAdvertisementChoresExists(advertisementId));
-    }
 
     @GetMapping("/advertisement")
     @Operation(summary = "Tagastab kuulutuse info vastavalt tema id-le")
@@ -36,13 +31,6 @@ public class AdController {
     public List<ChoreDto> getAllChores() {
         return adService.getAllChores();
     }
-
-    @GetMapping("/advertisement-chore")
-    @Operation(summary = "Tagastab kuulutuse teenuse tüübid vastavalt kuulutuse id-le")
-    public List<AdvertisementChoreShowDto> getAdvertisementChoresBy(@RequestParam Integer advertisementId) {
-        return adService.getAdvertisementChoresBy(advertisementId);
-    }
-
 
     @GetMapping("/type")
     @Operation(summary = "Tagastab kõik kuulutuse tüübid tabelist")
@@ -99,26 +87,6 @@ public class AdController {
     public ResponseEntity<Integer> addAdvertisement(@RequestBody AdvertisementDto request) {
         return ResponseEntity.ok(adService.addAdvertisement(request));
 
-    }
-
-    @PostMapping("/advertisement-chore")
-    @Operation(summary = "Uue teenuse lisamine kuulutusele.")
-    public void addAdvertisementChore(@RequestBody AdvertisementChoreDto request) {
-        adService.addAdvertisementChore(request);
-    }
-
-    @DeleteMapping("/advertisement-chore")
-    @Operation(summary = "Kustutab kuulutuse teenuste tabelist ära vastava teenuse.",
-            description = "Otsib kuulutuse teenuse vastavalt kuulutuse ja teenuse Id-de järgi ja kustutab vastava kuulutuse teenuse")
-    public void deleteAdvertisementChore(@RequestParam Integer choreId, @RequestParam Integer advertisementId) {
-        adService.deleteAdvertisementChore(choreId, advertisementId);
-    }
-
-    @DeleteMapping("/advertisement-chores")
-    @Operation(summary = "Kustutab kõik kuulutuse teenused.",
-            description = "Kustutab kõik kuulutuse teenused mida kasutaja valis kui kasutaja  vajutas kuulutuse teenuste lisamisel katkesta nuppu")
-    public void deleteAllAdvertisementChores(@RequestParam Integer advertisementId) {
-        adService.deleteAllAdvertisementChores(advertisementId);
     }
 
     @DeleteMapping("/advertisement")
