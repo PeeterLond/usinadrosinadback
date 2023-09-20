@@ -35,6 +35,5 @@ public class FeedbacksService {
     public List<FeedbackDto> findUserFeedbacks(Integer userId) {
         List<Feedback> feedbacks = feedbackService.findUserFeedbacksBy(userId);
         return feedbackMapper.toFeedbackDtos(feedbacks);
-
     }
 }
