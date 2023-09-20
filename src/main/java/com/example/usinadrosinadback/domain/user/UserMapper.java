@@ -11,5 +11,5 @@ public interface UserMapper {
     LoginResponseDto toLoginResponseDto(User user);
 
     @Mapping(source = "userPassword", target = "password")
-    User passwordUpdate(UserUpdatePasswordDto userUpdatePasswordDto, User user);
+    User passwordUpdate(UserUpdatePasswordDto userUpdatePasswordDto, @MappingTarget User user);
 }
