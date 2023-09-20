@@ -1,5 +1,6 @@
 package com.example.usinadrosinadback.domain.feedback;
 
+import com.example.usinadrosinadback.business.user.feedback.dto.FeedbackDto;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -9,9 +10,8 @@ public interface FeedbackMapper {
 
     @Mapping(source = "feedbackComment", target = "comment")
     @Mapping(source = "feedbackRating", target = "rating")
-    Feedback toFeedback(FeedbackContactViewDto request);
+    Feedback toFeedback(FeedbackDto request);
 
-    @Mapping(source = "id", target = "feedbackId")
     @Mapping(source = "comment", target = "feedbackComment")
     @Mapping(source = "rating", target = "feedbackRating")
     @Mapping(source = "receiverUser.id", target = "receiverUserId")

@@ -11,18 +11,11 @@ public class FeedbackService {
     private FeedbackRepository feedbackRepository;
 
 
-//    public List<Feedback> getFeedbackBy(Integer userId) {
-//
-//
-//    }
-
     public void saveFeedback(Feedback feedback) {
         feedbackRepository.save(feedback);
-
     }
 
     public List<Feedback> findUserFeedbacksBy(Integer userId) {
-        List<Feedback> feedbacks = feedbackRepository.findFeedbacksBy(userId);
-        return feedbacks;
+        return feedbackRepository.findFeedbacksBy(userId);
     }
 }
