@@ -27,13 +27,13 @@ public class FeedbacksService {
         feedbackService.saveFeedback(feedback);
     }
 
-    private void getAndSetUser(FeedbackDto request, Feedback feedback) {
-        User user = userService.getUserBy(request.getReceiverUserId());
-        feedback.setReceiverUser(user);
-    }
-
     public List<FeedbackDto> findUserFeedbacks(Integer userId) {
         List<Feedback> feedbacks = feedbackService.findUserFeedbacksBy(userId);
         return feedbackMapper.toFeedbackDtos(feedbacks);
+    }
+
+    private void getAndSetUser(FeedbackDto request, Feedback feedback) {
+        User user = userService.getUserBy(request.getReceiverUserId());
+        feedback.setReceiverUser(user);
     }
 }

@@ -13,10 +13,16 @@ public class MailboxController {
     @Resource
     private MailboxService mailboxService;
 
-    @GetMapping("/mailbox")
-    @Operation(summary = "Leiab userId järgi ülesse info saadetud ja saadud meilide kohta")
-    public List<MessageDto> getAllMessagesBy(@RequestParam Integer userId) {
-        return mailboxService.getAllMessagesBy(userId);
+    @GetMapping("/mailbox-sent")
+    @Operation(summary = "Leiab userId järgi ülesse info saadetud meilide kohta")
+    public List<MessageDto> findAllSentMessagesBy(@RequestParam Integer userId) {
+        return mailboxService.findAllSentMessagesBy(userId);
+    }
+
+    @GetMapping("/mailbox-receive")
+    @Operation(summary = "Leiab userId järgi ülesse info saadud meilide kohta")
+    public List<MessageDto> findAllReceivedMessagesBy(@RequestParam Integer userId) {
+        return mailboxService.findAllReceivedMessagesBy(userId);
     }
 
     @PostMapping("/mailbox")
