@@ -8,7 +8,6 @@ import com.example.usinadrosinadback.domain.user.mailbox.MessageMapper;
 import com.example.usinadrosinadback.domain.user.mailbox.MessageService;
 import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
-import org.mapstruct.Mapping;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -53,5 +52,13 @@ public class MailboxService {
     private void getAndSetTimeToMessage(Message message) {
         Instant currentTimeStamp = Time.getCurrentTimeStamp();
         message.setLetterTime(currentTimeStamp);
+    }
+
+    public void changeMessageIsRead(Integer messageId) {
+        Message messageBy = messageService.getMessageBy(messageId);
+        messageBy.setIsRead(true);
+        messageService.saveMessage(messageBy);
+
+
     }
 }

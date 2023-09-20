@@ -32,3 +32,4 @@ public class MessageDto implements Serializable {
     @NotNull
     private Boolean isRead = false;
 }
+
