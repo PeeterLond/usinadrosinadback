@@ -23,7 +23,6 @@ public interface MessageMapper {
 
     @Mapping(source = "messageLetterBody", target = "letterBody")
     @Mapping(source = "messageLetterTitle", target = "letterTitle")
-    @Mapping(source = "isRead", target = "isRead")
     Message toMessage(MessageDto messageDto);
 
 }

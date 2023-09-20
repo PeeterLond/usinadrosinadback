@@ -15,13 +15,13 @@ public class MailboxController {
 
     @GetMapping("/mailbox")
     @Operation(summary = "Leiab userId järgi ülesse info saadetud ja saadud meilide kohta")
-    public List<MessageDto> getAllMessagesBy(@RequestParam Integer userId){
+    public List<MessageDto> getAllMessagesBy(@RequestParam Integer userId) {
         return mailboxService.getAllMessagesBy(userId);
     }
 
     @PostMapping("/mailbox")
     @Operation(summary = "Lisab message tabelisse uue sõnumi.")
-    public void addNewMessage(@RequestBody MessageDto request){
+    public void addNewMessage(@RequestBody MessageDto request) {
         mailboxService.addNewMessage(request);
     }
 
