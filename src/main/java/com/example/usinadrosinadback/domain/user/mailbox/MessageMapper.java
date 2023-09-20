@@ -13,7 +13,6 @@ public interface MessageMapper {
     @Mapping(source = "letterBody", target = "messageLetterBody")
     @Mapping(source = "letterTitle", target = "messageLetterTitle")
     @Mapping(source = "letterTime", target = "messageLetterTime")
-    @Mapping(source = "isRead", target = "isRead")
     @Mapping(source = "receiverUser.id", target = "receiverUserId")
     @Mapping(source = "senderUser.id", target = "senderUserId")
     MessageDto getMessageByDto(Message message);

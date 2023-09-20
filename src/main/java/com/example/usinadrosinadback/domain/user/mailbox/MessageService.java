@@ -17,4 +17,8 @@ public class MessageService {
     public void saveMessage(Message message) {
         messageRepository.save(message);
     }
+
+    public Message getMessageBy(Integer messageId) {
+        return messageRepository.getReferenceById(messageId);
+    }
 }

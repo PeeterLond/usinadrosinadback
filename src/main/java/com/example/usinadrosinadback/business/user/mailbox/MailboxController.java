@@ -24,5 +24,10 @@ public class MailboxController {
     public void addNewMessage(@RequestBody MessageDto request) {
         mailboxService.addNewMessage(request);
     }
-
+    @PatchMapping("/mailbox")
+    @Operation(summary = "Muudab kirja loetuks")
+    public void changeMessageIsRead(@RequestParam Integer messageId){
+        mailboxService.changeMessageIsRead(messageId);
+    }
 }
+
