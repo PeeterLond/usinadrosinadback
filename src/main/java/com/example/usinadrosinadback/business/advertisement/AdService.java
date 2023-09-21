@@ -177,7 +177,7 @@ public class AdService {
     }
 
     private static boolean requestHasCity(Integer cityId) {
-        return !cityId.equals(0);
+        return cityId != null && !cityId.equals(0);
     }
 
     private void getAndSetToolToAdvertisement(AdvertisementDto request, Advertisement advertisement) {

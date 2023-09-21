@@ -74,10 +74,10 @@ INSERT INTO public.city (id, county_id, name) VALUES (DEFAULT, 15, 'Võru');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Põranda puhastus/pesu');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Akende pesu');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Pindade puhastus');
-INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Ahju puhastus/pliidi puhastus');
-INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Vannitoa puhastus/katlakivi eemaldus');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Pesu triikimine');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Asjade koristus');
+INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Ahju puhastus/pliidi puhastus');
+INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Vannitoa puhastus/katlakivi eemaldus');
 INSERT INTO public.chore (id, name) VALUES (DEFAULT, 'Lillede hooldus');
 
 INSERT INTO public."user" (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'usin', '123', 'A');
