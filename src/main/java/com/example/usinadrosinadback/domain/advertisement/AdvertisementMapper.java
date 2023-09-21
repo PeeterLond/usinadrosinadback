@@ -19,6 +19,7 @@ public interface AdvertisementMapper {
 
     @Mapping(source = "id", target = "advertisementId")
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.username", target = "userName")
     @Mapping(source = "county.name", target = "countyName")
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "tool.name", target = "toolName")
@@ -30,8 +31,10 @@ public interface AdvertisementMapper {
     @Mapping(source = "area", target = "advertisementArea")
     @Mapping(source = "price", target = "advertisementPrice")
     @Mapping(source = "time", target = "advertisementTime")
-    AdvertisementContactShowDto toAdvertisementContactDto(Advertisement advertisement);
+    AdvertisementContactShowDto toAdvertisementContactShowDto(Advertisement advertisement);
 
+
+    List<AdvertisementContactShowDto> toAdvertisementContactShowDtos(List<Advertisement> advertisements);
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "county.id", target = "countyId")
@@ -44,8 +47,6 @@ public interface AdvertisementMapper {
     @Mapping(source = "area", target = "advertisementArea")
     @Mapping(source = "price", target = "advertisementPrice")
     AdvertisementDto toAdvertisementDto(Advertisement advertisement);
-
-    List<AdvertisementContactShowDto> toAdvertisementDtos(List<Advertisement> advertisements);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(source = "advertisementDescription", target = "description")

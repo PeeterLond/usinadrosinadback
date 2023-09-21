@@ -16,16 +16,20 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDto implements Serializable {
+public class MessageShowDto implements Serializable {
+    private Integer messageId;
     @NotNull
     @Size(max = 255)
-    private String messageLetterTitle;
+    private String letterTitle;
     @NotNull
     @Size(max = 2000)
-    private String messageLetterBody;
+    private String letterBody;
+    @NotNull
+    private Instant letterTime;
     private Integer senderUserId;
     private String senderUserUsername;
     private Integer receiverUserId;
     private String receiverUserUsername;
+    @NotNull
+    private Boolean isRead = false;
 }
-

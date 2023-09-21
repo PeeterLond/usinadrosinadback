@@ -44,6 +44,12 @@ public class AdController {
         return adService.getAllAdvertisementTools();
     }
 
+    @GetMapping("/advertisement-with-contact")
+    @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga.")
+    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
+        return adService.getAllAdvertisementsWithContact();
+    }
+
     @GetMapping("/advertisement-user-with-contact")
     @Operation(summary = "Tagastab kõik kasutaja kuulutused koos tema kasutaja infoga vastavalt tema Id-le.")
     public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(@RequestParam Integer userId) {
@@ -72,12 +78,6 @@ public class AdController {
     @Operation(summary = "Tagastab kõik kuulutused vastavalt vahenditele")
     public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(@RequestParam Integer toolId) {
         return adService.getAdvertisementsWithContactByTool(toolId);
-    }
-
-    @GetMapping("/advertisement-with-contact")
-    @Operation(summary = "Tagastab kõik kuulutused koos kasutaja infoga.")
-    public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
-        return adService.getAllAdvertisementsWithContact();
     }
 
     @PostMapping("/advertisement")

@@ -1,6 +1,7 @@
 package com.example.usinadrosinadback.business.user.mailbox;
 
 import com.example.usinadrosinadback.business.user.mailbox.dto.MessageDto;
+import com.example.usinadrosinadback.business.user.mailbox.dto.MessageShowDto;
 import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.user.UserService;
 import com.example.usinadrosinadback.domain.user.mailbox.Message;
@@ -26,15 +27,15 @@ public class MailboxService {
     @Resource
     private UserService userService;
 
-    public List<MessageDto> findAllSentMessagesBy(Integer userId) {
+    public List<MessageShowDto> findAllSentMessagesBy(Integer userId) {
         List<Message> messages = messageService.findAllSentMessagesBy(userId);
-        return messageMapper.getMessageDtos(messages);
+        return messageMapper.toMessageShowDtos(messages);
 
     }
 
-    public List<MessageDto> findAllReceivedMessagesBy(Integer userId) {
+    public List<MessageShowDto> findAllReceivedMessagesBy(Integer userId) {
         List<Message> messages = messageService.findAllReceivedMessagesBy(userId);
-        return messageMapper.getMessageDtos(messages);
+        return messageMapper.toMessageShowDtos(messages);
     }
 
     @Transactional
@@ -43,6 +44,7 @@ public class MailboxService {
         getAndSetSenderUserIdToMessage(request.getSenderUserId(), message);
         getAndSetReceiverUserIdToMessage(request.getReceiverUserId(), message);
         getAndSetTimeToMessage(message);
+        message.setIsRead(false);
         messageService.saveMessage(message);
     }
 

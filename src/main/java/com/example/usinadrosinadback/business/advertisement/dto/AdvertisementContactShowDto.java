@@ -20,6 +20,7 @@ import java.time.Instant;
 public class AdvertisementContactShowDto implements Serializable {
     private Integer advertisementId;
     private Integer userId;
+    private String userName;
     private String countyName;
     private String cityName;
     private String toolName;

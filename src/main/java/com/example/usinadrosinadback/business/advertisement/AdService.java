@@ -13,7 +13,6 @@ import com.example.usinadrosinadback.domain.advertisement.tool.ToolService;
 import com.example.usinadrosinadback.domain.advertisement.type.Type;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeMapper;
 import com.example.usinadrosinadback.domain.advertisement.type.TypeService;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreMapper;
 import com.example.usinadrosinadback.domain.location.coordinate.Coordinate;
 import com.example.usinadrosinadback.domain.location.city.City;
 import com.example.usinadrosinadback.domain.location.city.CityService;
@@ -213,7 +212,7 @@ public class AdService {
     }
 
     private List<AdvertisementContactShowDto> getAndSetContactsToAdvertisementDtos(List<Advertisement> advertisementsBy) {
-        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementDtos(advertisementsBy);
+        List<AdvertisementContactShowDto> advertisementDtos = advertisementMapper.toAdvertisementContactShowDtos(advertisementsBy);
         ArrayList<Contact> contacts = contactService.getAdvertisementsContactInfo(advertisementDtos);
         setContactInfoToAdvertisement(advertisementDtos, contacts);
         return advertisementDtos;
