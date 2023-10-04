@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.business.advertisement.adChore;
+package com.example.usinadrosinadback.business.advertisement.adchore;
 
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreDto;
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreShowDto;
@@ -6,9 +6,9 @@ import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
 import com.example.usinadrosinadback.domain.advertisement.chore.Chore;
 import com.example.usinadrosinadback.domain.advertisement.chore.ChoreService;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChore;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreMapper;
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChoreService;
+import com.example.usinadrosinadback.domain.advertisementchore.AdvertisementChore;
+import com.example.usinadrosinadback.domain.advertisementchore.AdvertisementChoreMapper;
+import com.example.usinadrosinadback.domain.advertisementchore.AdvertisementChoreService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

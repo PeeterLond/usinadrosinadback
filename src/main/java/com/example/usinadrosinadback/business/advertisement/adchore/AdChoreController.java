@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.business.advertisement.adChore;
+package com.example.usinadrosinadback.business.advertisement.adchore;
 
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreDto;
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreShowDto;

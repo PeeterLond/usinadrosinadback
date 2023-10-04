@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.advertisementChore;
+package com.example.usinadrosinadback.domain.advertisementchore;
 
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

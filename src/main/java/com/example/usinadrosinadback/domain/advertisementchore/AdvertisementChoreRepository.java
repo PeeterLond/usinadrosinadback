@@ -1,10 +1,7 @@
-package com.example.usinadrosinadback.domain.advertisementChore;
+package com.example.usinadrosinadback.domain.advertisementchore;
 
-import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
