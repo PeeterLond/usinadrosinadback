@@ -32,6 +32,9 @@ public class User {
     @Column(name = "password", nullable = false, length = 50)
     private String password;
 
+    @Column(name = "avg_rating")
+    private Float avgRating;
+
     @Size(max = 50)
     @NotNull
     @Column(name = "status", nullable = false, length = 50)

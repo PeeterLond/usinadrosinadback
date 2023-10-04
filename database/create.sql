@@ -13,7 +13,7 @@ CREATE TABLE advertisement (
     coordinate_id int  NULL,
     description varchar(2000)  NOT NULL,
     area int  NULL,
-    price decimal(5,2)  NOT NULL,
+    price float(2)  NOT NULL,
     time timestamp  NOT NULL,
     CONSTRAINT advertisement_pk PRIMARY KEY (id)
 );
@@ -126,6 +126,7 @@ CREATE TABLE "user" (
     role_id int  NOT NULL,
     username varchar(50)  NOT NULL,
     password varchar(50)  NOT NULL,
+    avg_rating float(1) NULL,
     status varchar(50)  NOT NULL,
     CONSTRAINT id PRIMARY KEY (id)
 );

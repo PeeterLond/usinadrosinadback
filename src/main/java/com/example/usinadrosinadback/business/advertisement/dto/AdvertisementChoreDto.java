@@ -1,6 +1,6 @@
 package com.example.usinadrosinadback.business.advertisement.dto;
 
-import com.example.usinadrosinadback.domain.advertisementChore.AdvertisementChore;
+import com.example.usinadrosinadback.domain.advertisementchore.AdvertisementChore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

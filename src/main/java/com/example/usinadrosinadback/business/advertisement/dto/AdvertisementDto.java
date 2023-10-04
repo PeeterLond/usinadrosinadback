@@ -29,5 +29,5 @@ public class AdvertisementDto implements Serializable {
     private String advertisementDescription;
     private Integer advertisementArea;
     @NotNull
-    private BigDecimal advertisementPrice;
+    private Float advertisementPrice;
 }

@@ -1,4 +1,4 @@
-package com.example.usinadrosinadback.domain.advertisementChore;
+package com.example.usinadrosinadback.domain.advertisementchore;
 
 import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementChoreShowDto;
 import org.mapstruct.*;

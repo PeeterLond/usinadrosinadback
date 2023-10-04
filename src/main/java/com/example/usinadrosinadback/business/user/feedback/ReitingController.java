@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class FeedbacksController {
+public class ReitingController {
 
     @Resource
-    private FeedbacksService feedbacksService;
+    private ReitingService reitingService;
 
     @GetMapping("/feedback")
     @Operation(summary = "Tagastab kõik kasutajale antud tagasisided receiver userId järgi")
     public List<FeedbackDto> findUserFeedbacks(@RequestParam Integer userId) {
-        return feedbacksService.findUserFeedbacks(userId);
+        return reitingService.findUserFeedbacks(userId);
     }
 
     @PostMapping("/feedback")
-    @Operation(summary="Kasutajale uue tagasiside lisamine.")
+    @Operation(summary="Loob kasutajale uue tagasiside ja muudab kasutaja keskmise reitngu väärtuse.")
     public void addFeedback(@RequestBody FeedbackDto request) {
-        feedbacksService.addFeedback(request);
+        reitingService.addFeedbackAndChangeAvgRating(request);
     }
  }
