@@ -21,6 +21,7 @@ public class AdvertisementContactShowDto implements Serializable {
     private Integer advertisementId;
     private Integer userId;
     private String userName;
+    private Float user_avg_rating;
     private String countyName;
     private String cityName;
     private String toolName;
@@ -33,7 +34,7 @@ public class AdvertisementContactShowDto implements Serializable {
     private String advertisementDescription;
     private Integer advertisementArea;
     @NotNull
-    private BigDecimal advertisementPrice;
+    private Float advertisementPrice;
     @NotNull
     private Instant advertisementTime;
     @NotNull

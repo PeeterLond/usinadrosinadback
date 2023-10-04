@@ -4,6 +4,7 @@ import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementCon
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementMapper;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
+import com.example.usinadrosinadback.domain.feedback.FeedbackService;
 import com.example.usinadrosinadback.domain.user.contact.Contact;
 import com.example.usinadrosinadback.domain.user.contact.ContactService;
 import com.example.usinadrosinadback.util.ImageConverter;
@@ -21,6 +22,9 @@ public class AdWithContactService {
 
     @Resource
     private ContactService contactService;
+
+    @Resource
+    private FeedbackService feedbackService;
 
     @Resource
     private AdvertisementMapper advertisementMapper;

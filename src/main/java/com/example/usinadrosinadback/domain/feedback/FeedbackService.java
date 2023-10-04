@@ -1,5 +1,6 @@
 package com.example.usinadrosinadback.domain.feedback;
 
+import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementContactShowDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,5 @@ public class FeedbackService {
     public List<Feedback> findUserFeedbacksBy(Integer userId) {
         return feedbackRepository.findFeedbacksBy(userId);
     }
+
 }

@@ -21,7 +21,6 @@ import com.example.usinadrosinadback.domain.location.county.County;
 import com.example.usinadrosinadback.domain.location.county.CountyService;
 import com.example.usinadrosinadback.domain.user.User;
 import com.example.usinadrosinadback.domain.user.UserService;
-import com.example.usinadrosinadback.domain.user.contact.ContactService;
 import com.example.usinadrosinadback.util.Time;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

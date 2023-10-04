@@ -20,6 +20,7 @@ public interface AdvertisementMapper {
     @Mapping(source = "id", target = "advertisementId")
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.username", target = "userName")
+    @Mapping(source = "user.avgRating", target = "user_avg_rating")
     @Mapping(source = "county.name", target = "countyName")
     @Mapping(source = "city.name", target = "cityName")
     @Mapping(source = "tool.name", target = "toolName")

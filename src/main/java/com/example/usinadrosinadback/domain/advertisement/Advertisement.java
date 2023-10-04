@@ -63,7 +63,7 @@ public class Advertisement {
 
     @NotNull
     @Column(name = "price", nullable = false, precision = 5, scale = 2)
-    private BigDecimal price;
+    private Float price;
 
     @NotNull
     @Column(name = "\"time\"", nullable = false)
