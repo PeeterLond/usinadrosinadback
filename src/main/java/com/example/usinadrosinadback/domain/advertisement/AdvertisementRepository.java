@@ -9,21 +9,14 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, In
     @Query("select a from Advertisement a where a.user.id = ?1 order by a.time DESC")
     List<Advertisement> findAllUserAdvertisementsBy(Integer userId);
 
-    @Query("select a from Advertisement a where a.county.id = ?1")
-    List<Advertisement> findAdvertisementsByCounty(Integer countyId);
-
-    @Query("select a from Advertisement a where a.city.id = ?1")
-    List<Advertisement> findAdvertisementsByCity(Integer cityId);
-
-    @Query("select a from Advertisement a where a.type.id = ?1")
-    List<Advertisement> findAdvertisementsByType(Integer typeId);
-
-    @Query("select a from Advertisement a where a.tool.id = ?1")
-    List<Advertisement> findAdvertisementsByTool(Integer toolId);
-
-
-
-
+    @Query("""
+            select a from Advertisement a
+            where (:countyId = 0 or a.county.id = :countyId)
+            and (:cityId = 0 or a.city.id = :cityId)
+            and (:toolId = 0 or a.tool.id = :toolId)
+            and (:typeId = 0 or a.type.id = :typeId)
+            order by a.time DESC""")
+    List<Advertisement> findAdvertisementsBy(Integer countyId, Integer cityId, Integer toolId, Integer typeId);
 
 
 }

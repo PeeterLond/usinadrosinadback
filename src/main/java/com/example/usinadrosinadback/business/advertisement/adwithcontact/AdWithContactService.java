@@ -4,12 +4,12 @@ import com.example.usinadrosinadback.business.advertisement.dto.AdvertisementCon
 import com.example.usinadrosinadback.domain.advertisement.Advertisement;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementMapper;
 import com.example.usinadrosinadback.domain.advertisement.AdvertisementService;
-import com.example.usinadrosinadback.domain.feedback.FeedbackService;
 import com.example.usinadrosinadback.domain.user.contact.Contact;
 import com.example.usinadrosinadback.domain.user.contact.ContactService;
 import com.example.usinadrosinadback.util.ImageConverter;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,6 @@ public class AdWithContactService {
     private ContactService contactService;
 
     @Resource
-    private FeedbackService feedbackService;
-
-    @Resource
     private AdvertisementMapper advertisementMapper;
 
     public List<AdvertisementContactShowDto> getAllAdvertisementsWithContact() {
@@ -37,26 +34,6 @@ public class AdWithContactService {
     public List<AdvertisementContactShowDto> getUserAdvertisementsWithContactBy(Integer userId) {
         List<Advertisement> userAdvertisements = advertisementService.getUserAdvertisementBy(userId);
         return getAndSetContactsToAdvertisementDtos(userAdvertisements);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCounty(Integer countyId) {
-        List<Advertisement> advertisementsByCounty = advertisementService.getAdvertisementsByCounty(countyId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByCounty);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByCity(Integer cityId) {
-        List<Advertisement> advertisementsByCity = advertisementService.getAdvertisementsByCity(cityId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByCity);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByType(Integer typeId) {
-        List<Advertisement> advertisementsByType = advertisementService.getAdvertisementsByType(typeId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByType);
-    }
-
-    public List<AdvertisementContactShowDto> getAdvertisementsWithContactByTool(Integer toolId) {
-        List<Advertisement> advertisementsByTool = advertisementService.getAdvertisementsByTool(toolId);
-        return getAndSetContactsToAdvertisementDtos(advertisementsByTool);
     }
 
     private List<AdvertisementContactShowDto> getAndSetContactsToAdvertisementDtos(List<Advertisement> advertisements) {
@@ -95,5 +72,11 @@ public class AdWithContactService {
         if (contacts.get(i).getCity() != null) {
             advertisementDtos.get(i).setContactCityName(contacts.get(i).getCity().getName());
         }
+    }
+
+    public List<AdvertisementContactShowDto> getAdvertisementsWithContactBy(Integer countyId, Integer cityId,
+                                                                            Integer toolId, Integer typeId) {
+        List<Advertisement> advertisements = advertisementService.getAdvertisementsBy(countyId, cityId, toolId, typeId);
+        return getAndSetContactsToAdvertisementDtos(advertisements);
     }
 }
