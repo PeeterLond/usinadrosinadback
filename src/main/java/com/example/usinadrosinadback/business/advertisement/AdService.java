@@ -120,7 +120,7 @@ public class AdService {
         handleToolUpdate(request, advertisement);
         handleTypeUpdate(request, advertisement);
         getAndSetTimeToAdvertisement(advertisement);
-//        handleCoordinateUpdate(request, advertisement);
+        handleCoordinateUpdate(request, advertisement);
     }
 
     private void getAndSetUserToAdvertisement(AdvertisementDto request, Advertisement advertisement) {
@@ -220,10 +220,10 @@ public class AdService {
             Coordinate coordinate = createSetAndSaveCoordinate(request);
             advertisement.setCoordinate(coordinate);
         } else if (requestHasNewDifferentCoordinate(request, adCoordinates)){
-            Coordinate coordinate = coordinateService.getCoordinateBy(request.getCoordinateLongField(), request.getCoordinateLat());
-            coordinate.setLongField(request.getCoordinateLongField());
-            coordinate.setLat(request.getCoordinateLat());
-            advertisement.setCoordinate(coordinate);
+            adCoordinates.setLongField(request.getCoordinateLongField());
+            adCoordinates.setLat(request.getCoordinateLat());
+            coordinateService.saveCoordinate(adCoordinates);
+            advertisement.setCoordinate(adCoordinates);
         }
     }
 
@@ -245,7 +245,7 @@ public class AdService {
     }
 
     private static boolean hasCoordinates(AdvertisementDto request) {
-        return request.getCoordinateLongField() == null && request.getCoordinateLat() == null;
+        return request.getCoordinateLongField() != null && request.getCoordinateLat() != null;
     }
 
     private static boolean hasSameType(Integer adTypeId, Type type) {
