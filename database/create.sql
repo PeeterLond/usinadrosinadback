@@ -59,8 +59,8 @@ CREATE TABLE contact (
 -- Table: coordinate
 CREATE TABLE coordinate (
     id serial  NOT NULL,
-    long decimal(17,14)  NOT NULL,
-    lat decimal(17,14)  NOT NULL,
+    long decimal(9,6)  NOT NULL,
+    lat decimal(9,6)  NOT NULL,
     CONSTRAINT coordinate_pk PRIMARY KEY (id)
 );
 
