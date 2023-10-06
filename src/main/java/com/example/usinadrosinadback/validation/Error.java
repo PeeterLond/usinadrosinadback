@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Error {
     INCORRECT_CREDENTIALS("Vale kasutajanimi või parool", 111),
-    CONTACT_USERNAME_UNAVAILABLE("Kasutajanimi on võetud", 222);
+    CONTACT_USERNAME_UNAVAILABLE("Kasutajanimi on võetud", 222),
+    USER_DOESNT_EXIST("Sellise emailiga kasutajat ei eksisteeri", 333);
 
 
     private final String message;
