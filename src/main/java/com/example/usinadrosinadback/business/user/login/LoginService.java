@@ -6,6 +6,7 @@ import com.example.usinadrosinadback.domain.user.UserMapper;
 import com.example.usinadrosinadback.domain.user.UserService;
 import com.example.usinadrosinadback.domain.user.contact.Contact;
 import com.example.usinadrosinadback.domain.user.contact.ContactService;
+import com.example.usinadrosinadback.util.EmailService;
 import com.example.usinadrosinadback.util.PasswordGenerator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class LoginService {
 
     @Resource
     private ContactService contactService;
+
+    @Resource
+    private EmailService emailService;
 
     @Resource
     private UserMapper userMapper;
@@ -35,7 +39,7 @@ public class LoginService {
         user.setPassword(newPassword);
         userService.saveUser(user);
 
+        emailService.sendEmail(email, "Salasõna taastamine", "Teie uus salasõna on: " + newPassword);
 
-        // send password to email
     }
 }

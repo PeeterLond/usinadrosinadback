@@ -24,7 +24,7 @@ public class ProfileController {
                     "Kui city id on 0 siis linna ei lisata kasutaja külge")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "403", description = "Selline kasutaja on juba süsteemis olemas.",
+            @ApiResponse(responseCode = "403", description = "message: Kasutajanimi on võetud. errorCode: 222",
                     content = @Content(schema = @Schema(implementation = ApiError.class)))})
     public void addContact(@RequestBody ContactCreateAndEditDto request) {
         profileService.addContact(request);
