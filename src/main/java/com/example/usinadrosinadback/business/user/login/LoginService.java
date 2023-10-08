@@ -11,6 +11,8 @@ import com.example.usinadrosinadback.util.PasswordGenerator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import static com.example.usinadrosinadback.util.EmailTemplates.RESET_PASSWORD;
+
 @Service
 public class LoginService {
 
@@ -39,7 +41,8 @@ public class LoginService {
         user.setPassword(newPassword);
         userService.saveUser(user);
 
-        emailService.sendEmail(email, "Salasõna taastamine", "Teie uus salasõna on: " + newPassword);
-
+        emailService.sendEmail(email,
+                RESET_PASSWORD.getTitle(),
+                RESET_PASSWORD.getMessage().replace("[salasõna]", newPassword));
     }
 }
