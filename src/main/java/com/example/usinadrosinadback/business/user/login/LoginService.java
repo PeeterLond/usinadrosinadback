@@ -41,7 +41,8 @@ public class LoginService {
         user.setPassword(newPassword);
         userService.saveUser(user);
 
-        emailService.sendEmail(email,
+        emailService.sendEmail(
+                email,
                 RESET_PASSWORD.getTitle(),
                 RESET_PASSWORD.getMessage().replace("[salasõna]", newPassword));
     }

@@ -8,7 +8,9 @@ public enum EmailTemplates {
     RESET_PASSWORD("Salasõna taastatud Usinate Rosinate leheküljel",
             """
                     Unustasid enda Usinate Rosinate salasõna?
-                      Siin on sinu uus salasõna [salasõna]
+                    
+                      Siin on sinu uus salasõna: [salasõna]
+                      
                       Aitäh, et kasutad meie platvormi""");
 
 
